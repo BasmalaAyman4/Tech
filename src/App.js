@@ -5,8 +5,8 @@ import { AuthProvider } from "./Context/AuthContext";
 function App() {
   return (
     <>
-      <NavbarMenu />
-      <Router />
+    <NavbarMenu />
+    <Router />
     </>
   );
 }

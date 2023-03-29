@@ -237,7 +237,7 @@
     color: #6786a1 !important;
   }
   .side__close{
-    display: flex;
+    direction: ltr;
     
   }
   
@@ -339,7 +339,6 @@
       border: 0;
       width: 100%;
       font-weight: 300;
-     
       padding-left: 20px;
       border-radius: 45px;
       z-index: 0;
@@ -480,6 +479,11 @@
         color :rgba(0, 0, 0, 0.55) !important;
     
       }
+      .nav-link__nav-toggle.active{
+        background-color: #6786a1 !important;
+        color: #fff !important;
+    
+      }
       .nav__item::after{
         content: "";
         position: absolute;
@@ -502,6 +506,19 @@
 
     a.nav-link{
       color: rgba(0, 0, 0, 0.55) !important;
+    }
+    p.nav-link__nav-toggle{
+        color: rgba(0, 0, 0, 0.55) !important;
+        padding: 5px 0px 5px 0px !important;
+        margin: 0 !important;
+        font-family: "Changa-SemiBold" !important;
+        text-align: center !important;
+        padding: 10px 30px !important;
+        line-height: 30px !important;
+    } 
+    .dropdown-item__nav-toggle.active{
+        background-color: #6786a1 !important;
+        color: #fff !important;
     }
 .event{
   margin-right: 5px;
