@@ -15,7 +15,7 @@ import x from "./../../assets/icons/x.svg"
 import { MdNotificationsActive } from "react-icons/md";
 import { useRef } from 'react';
 import Logo from "./../../assets/Images/logo.png"
-import { AuthContext } from '../../Context/AuthContext';
+import { AuthContext } from "../../Context/AuthContext";
 
 const NavbarMenu = () => {
     const location = useLocation()
@@ -86,14 +86,14 @@ const NavbarMenu = () => {
                                         <li>
                                             <NavLink className="nav-link nav-link__nav-toggle" to="/event" href="index.html">  تواصل معنا </NavLink>
                                         </li>
-                                
+
                                         <li>
                                             <p
                                                 className="nav-link nav-link__nav-toggle"
                                                 onClick={() => setOpenSponsorships(!openSponsorships)}
                                                 aria-controls="Sponsorships"
                                                 aria-expanded={openSponsorships} >
-                                               تسجيل حساب
+                                                تسجيل حساب
 
                                             </p>
                                             <Collapse in={openSponsorships}>
@@ -105,11 +105,11 @@ const NavbarMenu = () => {
                                                 </div>
                                             </Collapse>
                                         </li>
-                                    
+
                                         <li>
                                             <NavLink className="nav-link nav-link__nav-toggle" to="/tgf" href="index.html"> تسجيل دخول</NavLink>
                                         </li>
-                                     
+
 
 
 
@@ -131,18 +131,18 @@ const NavbarMenu = () => {
                             <Offcanvas.Body>
                                 <Nav className={` flex-grow-1 p-2 ${styles.nav__dir} `} >
                                     <NavLink to="/" className={`${styles["main-nav__link"]} main-nav__link`}>الرئيسية</NavLink>
-                                    <NavLink to="/projreects" className={`${styles.mainNav__link} main-nav__link`}> استشارات </NavLink>
-                                    <NavLink to="/projecrrts" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
-                                    <div className="dropdown">
+                                    <NavLink to="/advisor" className={`${styles.mainNav__link} main-nav__link`}> استشارات </NavLink>
+                                    <NavLink to="/project" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
+                                    {authContext.auth.email ? <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > حسابي </NavLink> : <div className="dropdown">
                                         <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > تسجيل حساب</NavLink>
 
                                         <div className="dropdown-menu show nav__dropdown-list">
-                                            <Link className="dropdown-item" to="/advisor"> تسجيل مستشار </Link>
+                                            <Link className="dropdown-item" to="/signup-advisor"> تسجيل مستشار </Link>
                                             <Link className="dropdown-item" to="/signup">   تسجيل مستفيد</Link>
                                         </div>
-                                    </div>
-                                    <NavLink to="/projrfrects" className={`${styles.mainNav__link} main-nav__link`}> تسجيل دخول</NavLink>
-                               
+                                    </div>}
+                                    {authContext.auth.email ? <NavLink to="/" className={` ${styles.mainNav__link} main-nav__link`} onClick={logout}>تسجيل خروج"</NavLink> : <NavLink to="/login" className={`${styles.mainNav__link} main-nav__link`}> تسجيل دخول</NavLink>}
+
 
 
                                 </Nav>
@@ -155,6 +155,7 @@ const NavbarMenu = () => {
                 </Navbar>
             ))
             }
+
 
         </>
 

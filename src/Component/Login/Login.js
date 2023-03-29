@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import style from './Login.module.css'
+import { AuthContext } from '../../Context/AuthContext'
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.css';
 import "./login.css"
 export default function Login() {
 
-
+    const authContext = useContext(AuthContext);
     const validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const validPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     const [formData, setFormData] = useState({
@@ -29,6 +30,13 @@ export default function Login() {
 
     function login(e) {
         e.preventDefault();
+
+        if (password === 'basmala123') {
+            const token = 'abc';
+            localStorage.setItem('token', token);
+            localStorage.setItem('email', email);
+            authContext.setAuth({ token, email });
+        }
 
 
         let err = {}
