@@ -1,0 +1,9 @@
+body[dir="rtl"] .PhoneInputCountry{
+    direction: ltr;
+}
+body[dir="ltr"] .PhoneInputCountry{
+    direction: ltr;
+}
+select{
+    width: 100%;
+}
