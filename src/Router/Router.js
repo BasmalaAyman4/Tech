@@ -1,16 +1,23 @@
 import { Route, Routes } from "react-router-dom";
-import React from "react";
+import React, { useContext } from "react";
 import Login from "../Component/Login/Login"
 import SignUp from '../Component/Sign-up/SignUp'
-import Advisor from "../Component/Sign-upAdvisor/Advisor";
+import SignupAdvisor from "../Component/Sign-upAdvisor/Advisor";
+import Advisors from "../Component/Advisors/Advisors";
+import Details from "./../Component/AdvisorsDetails/AdvisorsDetails"
+import Home from "./../Global/Navbar/NavbarMenu"
+import { AuthContext } from "./../Context/AuthContext";
 export default function Router() {
+  const authContext = useContext(AuthContext);
   return (
     <>
       <Routes>
 
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={authContext.auth.email ? <Home /> : <Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/advisor" element={<Advisor />} />
+        <Route path="/signup-advisor" element={<SignupAdvisor />} />
+        <Route path="/advisor" element={<Advisors />} />
+        <Route path="/details" element={<Details />} />
       </Routes>
     </>
   )

@@ -1,0 +1,60 @@
+.path {
+
+    background-image: url(./../../assets/Images/loginWallpaper.png);
+    height: auto;
+    padding: 50px 0px;
+    background-size: cover;
+    background-position: center center;
+text-align: center;
+}
+.cardAdvisors {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 20px 20px 0 20px;
+    font-family: "Changa-Regular";
+}
+@media (max-width:767px) {
+    .cardAdvisors{
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media (min-width:768px) and (max-width:991px) {
+    .cardAdvisors {
+        display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2%;
+        }
+}
+@media (min-width:992px) and (max-width:1200px) {
+    .cardAdvisors {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2%;
+    }
+}
+.helpYou{
+    background-color: #6C757D;
+    height: auto;
+    padding: 50px;
+    color: #fff;
+    font-family: "Changa-Regular";
+    text-align: center;
+}
+.helpYou__icon{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+.send{
+    color: #3f3e3e;
+    background-color:#fff;
+    font-size: 70px;
+    padding: 15px;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+    margin-bottom:20px;
+}

@@ -1,0 +1,100 @@
+.all{
+    background-image: url(../../assets/Images/bg-pattern.jpg);
+
+    display: flex;
+}
+.details{
+    background-color: #fff !important;
+    box-shadow: inset 2px 5px 10px rgba(182, 182, 182, 0.61) !important;
+    width: 60%;
+    margin: 50px auto;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.advisorsDetails{
+    background-color: #9c9a9a;
+    padding: 20px 50px;
+    font-family: "Changa-Regular";
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.name{
+    display: flex;
+    align-items: center;
+    gap: 5%;
+    width: 50%;
+}
+.img{
+    width: 200px;
+    height: 200px;
+    border-radius: 1000px;
+    -webkit-border-radius: 1000px;
+    -moz-border-radius: 1000px;
+    -ms-border-radius: 1000px;
+    -o-border-radius: 1000px;
+}
+.career{
+    padding: 20px;
+    font-family: "Changa-Regular";
+}
+.careerTitle{
+border-bottom: 2px solid #838080;
+padding-bottom: 10px;
+padding-left: 10px;
+
+}
+.job{
+    padding-left: 20px;
+}
+.jobPara{
+    padding-left: 30px;
+}
+.skills{
+    padding-left: 15px;
+    
+}
+.btn {
+
+    position: fixed !important;
+    z-index: 100;
+    transform: rotate(0.75turn);
+    -webkit-transform: rotate(0.75turn);
+    -moz-transform: rotate(0.75turn);
+    -ms-transform: rotate(0.75turn);
+    -o-transform: rotate(0.75turn);
+    height: 50px;
+    border-radius: 1px !important;
+    -webkit-border-radius: 1px !important;
+    -moz-border-radius: 1px !important;
+    -ms-border-radius: 1px !important;
+    -o-border-radius: 1px !important;
+    background-color: #6786a1 !important;
+    border: 1px solid #6786a1 !important;
+    font-family: "Changa-Regular", sans-serif !important;
+    font-size: 17px;
+    z-index: 100000 !important;
+    right: -35px !important;
+    top: 50%;
+    text-decoration: none;
+    padding: 10px;
+    color: #fff;
+
+}
+
+.btn:hover {
+    background-color: #6786a1 !important;
+    border: 1px solid #6786a1 !important;
+    color: #fff;
+}
+.modal__para {
+    font-size: 17px;
+    text-align: center;
+    margin-top: 10px;
+    
+}
