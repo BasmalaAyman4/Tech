@@ -1,0 +1,43 @@
+.home-brief_title-container{
+    position: relative;
+}
+.home-brief_title{
+    font-family: "Changa-SemiBold";
+    font-size: 30px;
+    color: #28393a;
+    text-align: right;
+}
+.home-brief_title::after{
+    content: "";
+    width: 70px;
+    height: 4px;
+    top: 50px;
+    right: 0;
+    z-index: 110;
+    position: absolute;
+    background-color: #EC4863;
+}
+.home-brief_cart{
+
+    margin-top: 50px;
+    text-align: center !important;
+   
+}
+.home-brief__img{
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+.home-brief__title{
+    color: #273435 !important;
+    font-family: "Changa-Regular";
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    
+}
+.home-brief__pragraph{
+    font-family: "Changa-Regular";
+    color: #6B6B6B !important;
+    font-size: 18px;
+}
