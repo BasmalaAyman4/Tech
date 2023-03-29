@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState} from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './NavbarMenu.module.css'
 import './NavbarMenu.css'
 import Container from 'react-bootstrap/Container';
@@ -9,7 +9,7 @@ import { BsFacebook } from "react-icons/bs";
 import { BsYoutube } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
 import { BsTwitter } from "react-icons/bs";
-import { Link, NavLink, useLocation} from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Collapse } from 'react-bootstrap';
 import x from "./../../assets/Images/logo.png"
 import { MdNotificationsActive } from "react-icons/md";
@@ -19,9 +19,9 @@ import { AuthContext } from '../../Context/AuthContext';
 
 const NavbarMenu = () => {
     const location = useLocation()
-       
-  
-   
+
+
+
     const toggleNav = useRef();
     const [NavbarSide, setNavbarSide] = useState(false)
     const [openCases, setOpenCases] = useState(false);
@@ -30,14 +30,14 @@ const NavbarMenu = () => {
 
     useEffect(() => {
         setNavbarSide(false)
-     }, [location])
+    }, [location])
 
     function logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('email');
         authContext.setAuth({});
     }
-    
+
     return (
         <>
             <header>
@@ -47,11 +47,11 @@ const NavbarMenu = () => {
                             {/* {authContext.auth.email ? <Link to="/" className={`px-3 pt-2 ${styles.header__link}`} onClick={logout}>تسجيل خروج"</Link> : <Link to="/login" className={`px-3 pt-2 ${styles.header__link}`} > تسجيل الدخول"</Link>}
                             {authContext.auth.email ? <Link to="" className={`px-3 pt-2 ${styles.header__link}`}> تبرعاتي"</Link> : <Link to="/sign-up" className={`px-3 pt-2 ${styles.header__link}`}> تسجيل"</Link>} */}
                             {/* <Link to="" className={`px-3 pt-2 ${styles.header__link}`}> تسجيل الدخول </Link> */}
-                    
 
-                       
 
-                      
+
+
+
 
 
 
@@ -98,7 +98,7 @@ const NavbarMenu = () => {
                                                 aria-controls="Cases"
                                                 aria-expanded={openCases}
                                             >
-                                                 الحالات
+                                                الحالات
 
                                             </NavLink>
                                             <Collapse in={openCases}>
@@ -149,7 +149,7 @@ const NavbarMenu = () => {
                                         </li>
 
                                         <li>
-                                            <NavLink className="nav-link" to="/sign-up" href="index.html"> تسجيل"  </NavLink>
+                                            <NavLink className="nav-link" to="/signup" href="index.html"> تسجيل"  </NavLink>
                                         </li>
                                         <li>
                                             <NavLink className="nav-link" to="/login" href="index.html"> تسجيل الدخول"  </NavLink>
@@ -175,17 +175,17 @@ const NavbarMenu = () => {
                                 <Nav className={` flex-grow-1 p-2 ${styles.nav__dir} `} >
                                     <NavLink to="/" className={`${styles["main-nav__link"]} main-nav__link`}>الرئيسية</NavLink>
                                     <NavLink to="/projects" className={`${styles.mainNav__link} main-nav__link`}> استشارات </NavLink>
-                                    <NavLink to="/projects" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
+                                    <NavLink to="/project" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
                                     <div className="dropdown">
                                         <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > تسجيل حساب</NavLink>
 
                                         <div className="dropdown-menu show nav__dropdown-list">
-                                            <Link className="dropdown-item" to="/Login"> تسجيل مستشار </Link>
-                                            <Link className="dropdown-item" to="/Register">   تسجيل مستفيد</Link>
+                                            <Link className="dropdown-item" to="/advisor"> تسجيل مستشار </Link>
+                                            <Link className="dropdown-item" to="/signup">   تسجيل مستفيد</Link>
                                         </div>
                                     </div>
-                                    <NavLink to="/projects" className={`${styles.mainNav__link} main-nav__link`}> تسجيل دخول</NavLink>
-                               
+                                    <NavLink to="/login" className={`${styles.mainNav__link} main-nav__link`}> تسجيل دخول</NavLink>
+
 
 
                                 </Nav>
@@ -200,8 +200,8 @@ const NavbarMenu = () => {
             }
 
         </>
-    
-  )
+
+    )
 }
 
 export default NavbarMenu
