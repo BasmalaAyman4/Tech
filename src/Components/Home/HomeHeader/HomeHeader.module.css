@@ -1,0 +1,28 @@
+.home-header_banner{
+    width: 100% !important;
+    min-height: 400px !important;
+    position: relative;
+}
+.home-header_img{
+    width: 100% !important;
+    height: 100% !important;
+}
+.home-header_banner-content{
+    content: "";
+    position: absolute;
+    z-index: 100;
+    left: 30%;
+    transform: translateX(-50px);
+    top: 30%;
+}
+.home-header_banner-content{
+    direction: rtl;
+   
+}
+.home-header_banner-content h2{
+    font-family: "Changa-Bold";
+    line-height: 30px;
+    color:#303030;
+    padding: 20px;
+   
+}

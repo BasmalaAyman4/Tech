@@ -11,7 +11,7 @@ import { BsInstagram } from "react-icons/bs";
 import { BsTwitter } from "react-icons/bs";
 import { Link, NavLink, useLocation} from 'react-router-dom';
 import { Collapse } from 'react-bootstrap';
-import x from "./../../assets/Images/logo.png"
+import x from "./../../assets/icons/x.svg"
 import { MdNotificationsActive } from "react-icons/md";
 import { useRef } from 'react';
 import Logo from "./../../assets/Images/logo.png"
@@ -24,7 +24,6 @@ const NavbarMenu = () => {
    
     const toggleNav = useRef();
     const [NavbarSide, setNavbarSide] = useState(false)
-    const [openCases, setOpenCases] = useState(false);
     const [openSponsorships, setOpenSponsorships] = useState(false);
     const authContext = useContext(AuthContext);
 
@@ -48,12 +47,6 @@ const NavbarMenu = () => {
                             {authContext.auth.email ? <Link to="" className={`px-3 pt-2 ${styles.header__link}`}> تبرعاتي"</Link> : <Link to="/sign-up" className={`px-3 pt-2 ${styles.header__link}`}> تسجيل"</Link>} */}
                             {/* <Link to="" className={`px-3 pt-2 ${styles.header__link}`}> تسجيل الدخول </Link> */}
                     
-
-                       
-
-                      
-
-
 
                         </nav>
                         <div className={`pt-2 ${styles.social}`}>
@@ -86,74 +79,39 @@ const NavbarMenu = () => {
 
                                     <ul className="nav-side__list pt-3">
                                         <li>
-                                            <NavLink className="nav-link" to="/" href="index.html">الرئيسية" </NavLink>
+                                            <NavLink className="nav-link nav-link__nav-toggle" to="/" href="index.html">الرئيسية </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink className="nav-link" to="/projects" href="index.html">المشاريع" </NavLink>
+                                            <NavLink className="nav-link nav-link__nav-toggle" to="/projects" href="index.html">استشارات </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink
-                                                className="nav-link"
-                                                onClick={() => setOpenCases(!openCases)}
-                                                aria-controls="Cases"
-                                                aria-expanded={openCases}
-                                            >
-                                                 الحالات
-
-                                            </NavLink>
-                                            <Collapse in={openCases}>
-                                                <div id="Cases">
-                                                    <ul className=" nav-side_dropdown  "  >
-                                                        <li>  <Link className="dropdown-item" to="/ShopCategory"> حالات إنسانية"
-
-                                                        </Link> </li>
-                                                        <li> <Link className="dropdown-item" to="/ProductDetails"> حالات طبية" </Link></li>
-
-                                                    </ul>
-                                                </div>
-                                            </Collapse>
+                                            <NavLink className="nav-link nav-link__nav-toggle" to="/event" href="index.html">  تواصل معنا </NavLink>
                                         </li>
+                                
                                         <li>
-                                            <NavLink
-                                                className="nav-link"
+                                            <p
+                                                className="nav-link nav-link__nav-toggle"
                                                 onClick={() => setOpenSponsorships(!openSponsorships)}
                                                 aria-controls="Sponsorships"
                                                 aria-expanded={openSponsorships} >
-                                                الكفالات"
+                                               تسجيل حساب
 
-                                            </NavLink>
+                                            </p>
                                             <Collapse in={openSponsorships}>
                                                 <div id="Sponsorships">
                                                     <ul className=" nav-side_dropdown " >
-                                                        <li>  <Link className="dropdown-item" to="/Blog"> كفالة يتيم" </Link></li>
-                                                        <li>  <Link className="dropdown-item" to="/BlogDetails"> كفالة أسرة"</Link></li>
+                                                        <li>  <NavLink className="dropdown-item dropdown-item__nav-toggle" to="/Blog"> تسجيل مستشار  </NavLink></li>
+                                                        <li>  <NavLink className="dropdown-item  dropdown-item__nav-toggle" to="/BlogDetails"> تسجيل مستفيد</NavLink></li>
                                                     </ul>
                                                 </div>
                                             </Collapse>
                                         </li>
+                                    
                                         <li>
-                                            <NavLink className="nav-link" to="/event" href="index.html"> المناسبات"</NavLink>
+                                            <NavLink className="nav-link nav-link__nav-toggle" to="/tgf" href="index.html"> تسجيل دخول</NavLink>
                                         </li>
-                                        <li>
-                                            <NavLink className="nav-link" to="/" href="index.html">   جمعيات  خيرية"</NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink className="nav-link" to="/" href="index.html">صندوق علمني " </NavLink>
-                                        </li>
+                                     
 
-                                        <li>
-                                            <NavLink className="nav-link" to="/" href="index.html">حاسبة الزكاة"   </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink className="nav-link" to="/" href="index.html"> كيف اتبرع ؟ "</NavLink>
-                                        </li>
-
-                                        <li>
-                                            <NavLink className="nav-link" to="/sign-up" href="index.html"> تسجيل"  </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink className="nav-link" to="/login" href="index.html"> تسجيل الدخول"  </NavLink>
-                                        </li>
 
 
                                     </ul>
@@ -174,8 +132,8 @@ const NavbarMenu = () => {
                             <Offcanvas.Body>
                                 <Nav className={` flex-grow-1 p-2 ${styles.nav__dir} `} >
                                     <NavLink to="/" className={`${styles["main-nav__link"]} main-nav__link`}>الرئيسية</NavLink>
-                                    <NavLink to="/projects" className={`${styles.mainNav__link} main-nav__link`}> استشارات </NavLink>
-                                    <NavLink to="/projects" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
+                                    <NavLink to="/projreects" className={`${styles.mainNav__link} main-nav__link`}> استشارات </NavLink>
+                                    <NavLink to="/projecrrts" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
                                     <div className="dropdown">
                                         <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > تسجيل حساب</NavLink>
 
@@ -184,7 +142,7 @@ const NavbarMenu = () => {
                                             <Link className="dropdown-item" to="/Register">   تسجيل مستفيد</Link>
                                         </div>
                                     </div>
-                                    <NavLink to="/projects" className={`${styles.mainNav__link} main-nav__link`}> تسجيل دخول</NavLink>
+                                    <NavLink to="/projrfrects" className={`${styles.mainNav__link} main-nav__link`}> تسجيل دخول</NavLink>
                                
 
 
