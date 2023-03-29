@@ -86,14 +86,14 @@ const NavbarMenu = () => {
                                         <li>
                                             <NavLink className="nav-link nav-link__nav-toggle" to="/event" href="index.html">  تواصل معنا </NavLink>
                                         </li>
-                                
+
                                         <li>
                                             <p
                                                 className="nav-link nav-link__nav-toggle"
                                                 onClick={() => setOpenSponsorships(!openSponsorships)}
                                                 aria-controls="Sponsorships"
                                                 aria-expanded={openSponsorships} >
-                                               تسجيل حساب
+                                                تسجيل حساب
 
                                             </p>
                                             <Collapse in={openSponsorships}>
@@ -105,11 +105,11 @@ const NavbarMenu = () => {
                                                 </div>
                                             </Collapse>
                                         </li>
-                                    
+
                                         <li>
                                             <NavLink className="nav-link nav-link__nav-toggle" to="/tgf" href="index.html"> تسجيل دخول</NavLink>
                                         </li>
-                                     
+
 
 
 
@@ -131,30 +131,18 @@ const NavbarMenu = () => {
                             <Offcanvas.Body>
                                 <Nav className={` flex-grow-1 p-2 ${styles.nav__dir} `} >
                                     <NavLink to="/" className={`${styles["main-nav__link"]} main-nav__link`}>الرئيسية</NavLink>
-<<<<<<< HEAD
                                     <NavLink to="/advisor" className={`${styles.mainNav__link} main-nav__link`}> استشارات </NavLink>
                                     <NavLink to="/project" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
                                     {authContext.auth.email ? <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > حسابي </NavLink> : <div className="dropdown">
-=======
-                                    <NavLink to="/projreects" className={`${styles.mainNav__link} main-nav__link`}> استشارات </NavLink>
-                                    <NavLink to="/projecrrts" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
-                                    <div className="dropdown">
->>>>>>> a9ac2e75672a78262145c338d078c1d70106e5a2
                                         <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > تسجيل حساب</NavLink>
 
                                         <div className="dropdown-menu show nav__dropdown-list">
                                             <Link className="dropdown-item" to="/signup-advisor"> تسجيل مستشار </Link>
                                             <Link className="dropdown-item" to="/signup">   تسجيل مستفيد</Link>
                                         </div>
-<<<<<<< HEAD
                                     </div>}
                                     {authContext.auth.email ? <NavLink to="/" className={` ${styles.mainNav__link} main-nav__link`} onClick={logout}>تسجيل خروج"</NavLink> : <NavLink to="/login" className={`${styles.mainNav__link} main-nav__link`}> تسجيل دخول</NavLink>}
 
-=======
-                                    </div>
-                                    <NavLink to="/projrfrects" className={`${styles.mainNav__link} main-nav__link`}> تسجيل دخول</NavLink>
-                               
->>>>>>> a9ac2e75672a78262145c338d078c1d70106e5a2
 
 
                                 </Nav>
