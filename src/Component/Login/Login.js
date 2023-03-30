@@ -42,12 +42,12 @@ export default function Login() {
         let err = {}
 
         if (formData.email === '') {
-            err.email = "Email is required";
+            err.email = "البريد الالكتروني مطلوب";
         } else if (!validEmail.test(email)) {
-            err.email = "Invalid Email";
+            err.email = "بريد الكتروني غير صحيح";
         }
         if (formData.password === '') {
-            err.password = "password is required"
+            err.password = "كلمه السر مطلوبه"
         } else if (!validPass.test(password)) {
             err.password = 'Minimum eight characters, at least one letter and one numbe';
 
@@ -69,9 +69,7 @@ export default function Login() {
             </div>
 
             <section className={style.logForm}>
-
                 <div className='container'>
-
                     <div className={style.login}>
                         <h2 className={style.login__title}> مرحبا بك مجددا</h2>
                         <p>يمكنك تسجيل الدخول باستخدام بريدك الالكتروني او اسم المستخدم</p>

@@ -43,23 +43,23 @@ export default function Advisor() {
         let err = {}
 
         if (formData.userName === '') {
-            err.userName = 'Your Name is required';
+            err.userName = 'الاسم مطلوب';
         } else if (!validname.test(userName)) {
-            err.userName = 'Your Name must be only string without spaces';
+            err.userName = 'يحب كتابه الاسم بدون مسافات';
         }
         if (formData.email === '') {
-            err.email = "Email is required";
+            err.email = "البريد الالكتروني مطلوب";
         } else if (!validEmail.test(email)) {
-            err.email = "Invalid Email";
+            err.email = "بريد غير صحيح";
         }
         if (formData.password === '') {
-            err.password = "password is required"
+            err.password = "كلمه السر مطلوبه"
         } else if (!validPass.test(password)) {
             err.password = 'Minimum eight characters, at least one letter and one number';
 
         }
         if (formData.confirmPassword !== formData.password) {
-            err.confirmPassword = "Confirm Password does not match"
+            err.confirmPassword = "تأكيد كلمه المرور لا تتطابق"
         }
         setFormError({ ...err })
 

@@ -73,23 +73,23 @@ export default function SignUp() {
     let err = {}
 
     if (formData.userName === '') {
-      err.userName = 'Your Name is required';
+      err.userName = 'الاسم مطلوب';
     } else if (!validname.test(userName)) {
-      err.userName = 'Your Name must be only string without spaces';
+      err.userName = 'يجب كتابه الاسم بدون مسافات';
     }
     if (formData.email === '') {
-      err.email = "Email is required";
+      err.email = "بريد الكتروني مطلوب";
     } else if (!validEmail.test(email)) {
-      err.email = "Invalid Email";
+      err.email = "بريد الكتروني غير صحيح";
     }
     if (formData.password === '') {
-      err.password = "password is required"
+      err.password = "كلمه السر مطلوبه"
     } else if (!validPass.test(password)) {
       err.password = 'Minimum eight characters, at least one letter and one number';
 
     }
     if (formData.confirmPassword !== formData.password) {
-      err.confirmPassword = "Confirm Password does not match"
+      err.confirmPassword = "تأكيد كلمه السر لا تتطابق"
     }
     setFormError({ ...err })
   }
