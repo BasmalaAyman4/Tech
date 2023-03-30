@@ -10,7 +10,7 @@ text-align: center;
 .cardAdvisors {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    margin: 20px 20px 0 20px;
+    margin: 20px 20px 0px 20px;
     font-family: "Changa-Regular";
 }
 @media (max-width:767px) {
@@ -40,6 +40,7 @@ text-align: center;
     color: #fff;
     font-family: "Changa-Regular";
     text-align: center;
+    margin-top: 100px;
 }
 .helpYou__icon{
     display: flex;
@@ -57,4 +58,10 @@ text-align: center;
     -ms-border-radius: 25px;
     -o-border-radius: 25px;
     margin-bottom:20px;
+}
+@media (max-width:767px) {
+    .helpYou__icon{
+        display: flex;
+        flex-direction: column;
+    }
 }

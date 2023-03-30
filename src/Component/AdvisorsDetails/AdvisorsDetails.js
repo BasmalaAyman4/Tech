@@ -36,11 +36,11 @@ export default function AdvisorsDetails() {
                     </div>
                 </div>
                 <div className={style.career}>
-                    <h4 className={style.careerTitle}>Career Profile:</h4>
+                    <h4 className={style.careerTitle} dir="rtl">المسمى الوظيفي:</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </div>
                 <div className={style.career}>
-                    <h4 className={style.careerTitle}>Professional Experience :</h4>
+                    <h4 className={style.careerTitle} dir="rtl">الخبرة المهنية :</h4>
                     <h5 className={style.careerDate}>April 2022 - July 2022</h5>
                     <p className={style.job}>Front-End Developer (FREELANCER)</p>
                     <p className={style.jobPara}>- Worked with many people in different countries.</p>
@@ -55,7 +55,7 @@ export default function AdvisorsDetails() {
                     <p className={style.jobPara}>- Built different front-end Projects in JavaScript</p>
                 </div>
                 <div className={style.career}>
-                    <h4 className={style.careerTitle}>Skills:</h4>
+                    <h4 className={style.careerTitle} dir="rtl">المهارات الشخصية :</h4>
                     <div className={style.skills}>
                         <p>- HTML</p>
                         <p>- CSS</p>
