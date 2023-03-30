@@ -141,7 +141,7 @@ const NavbarMenu = () => {
                                             <Link className="dropdown-item" to="/signup">   تسجيل مستفيد</Link>
                                         </div>
                                     </div>}
-                                    {authContext.auth.email ? <NavLink to="/" className={` ${styles.mainNav__link} main-nav__link`} onClick={logout}>تسجيل خروج"</NavLink> : <NavLink to="/login" className={`${styles.mainNav__link} main-nav__link`}> تسجيل دخول</NavLink>}
+                                    {authContext.auth.email ? <NavLink to="/logout" className={` ${styles.mainNav__link} main-nav__link`} onClick={logout}>تسجيل خروج</NavLink> : <NavLink to="/login" className={`${styles.mainNav__link} main-nav__link`}> تسجيل دخول</NavLink>}
 
 
 

@@ -2,6 +2,7 @@
     display: flex;
     text-align: center;
     padding-bottom: 50px;
+  
 
 }
 .path {
@@ -99,10 +100,11 @@
     box-shadow: 0 0 0 4px rgba(158, 158, 158, 0.61);
 }
 .label {
+    display: block;
     text-align: right !important;
-    margin-left: 55%;
-    font-size: 20px;
-margin-bottom: 0px !important;
+    font-size: 16px;
+    margin-bottom: 0px !important;
+    font-family: "Changa-Regular" !important;
 }
 .signup__btn {
     --color: #6786A1;
