@@ -9,6 +9,7 @@ import { AuthContext } from "./../Context/AuthContext";
 import Home from "../Component/pages/Home";
 import ChatWithEng from "../Component/ChatWithEng/ChatWithEng";
 import ContactUs from "../Component/ContactUs/ContactUs";
+import UserUpdate from "../Component/UserUpdate/UserUpdate";
 export default function Router() {
   const authContext = useContext(AuthContext);
   return (
@@ -23,6 +24,7 @@ export default function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/chatwithEng" element={<ChatWithEng />} />
         <Route path="/contactUs" element={<ContactUs />} />
+        <Route path="/user-update" element={<UserUpdate />} />
       </Routes>
     </>
   )
