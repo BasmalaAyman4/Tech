@@ -125,7 +125,7 @@ const NavbarMenu = () => {
                                     <NavLink to="/" className={`${styles["main-nav__link"]} main-nav__link`}>الرئيسية</NavLink>
                                     <NavLink to="/advisor" className={`${styles.mainNav__link} main-nav__link`}> استشارات </NavLink>
                                     <NavLink to="/contactUs" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
-                                    {authContext.auth.email ? <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`} to="/user-update" > حسابي </NavLink> : <div className="dropdown">
+                                    {authContext.auth.email ? <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`} to="/provider-update" > حسابي </NavLink> : <div className="dropdown">
                                         <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > تسجيل حساب</NavLink>
 
                                         <div className="dropdown-menu show nav__dropdown-list">
