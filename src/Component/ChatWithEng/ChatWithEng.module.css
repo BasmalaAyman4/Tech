@@ -5,10 +5,10 @@
     padding-top: 30px;
 }
 .chat-with-eng__container{
-    max-height: 600px;
-    width: 50%;
-    border-radius: 10px;
-    
+    max-height: 800px;
+    width: 90%;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
     background-color: #fff;
     margin: auto;
     
@@ -18,7 +18,8 @@
     background: rgb(131, 212, 175);
     background: linear-gradient(30deg, rgb(103, 134, 161) 0%, rgb(114, 166, 175) 50%, rgba(116, 178, 233, 0.61) 100%);
     width: 100%;
-    border-radius: inherit;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -47,13 +48,12 @@
 
 }
 .chat-with-eng__content{
-    max-height: 500px;
     width: 100%;
     background-color: #fff;
     border-radius: inherit;
-    
+      
 }
-@media (max-width:768px) {
+@media (max-width:991px) {
     .chat-with-eng__container{
         max-height: 600px;
         width: 90%;

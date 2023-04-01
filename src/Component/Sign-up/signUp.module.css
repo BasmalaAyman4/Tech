@@ -87,6 +87,7 @@
 }
 .input::placeholder{
     text-align: right !important;
+   
 }
 
 .input:focus {
@@ -150,7 +151,7 @@
 
 .signup__btn:hover:before {
     top: -30px;
-    left: -40px;
+    left: -50px;
 }
 
 .signup__btn:active:before {
@@ -171,6 +172,7 @@
 
     
 }
+
 
 
 @media (max-width:767px) {

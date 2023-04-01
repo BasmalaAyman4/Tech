@@ -5,34 +5,24 @@
     padding: 50px 0px;
     background-size: cover;
     background-position: center center;
-text-align: center;
+    text-align: center;
+    display: flex;
 }
 .cardAdvisors {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin: 20px 20px 0 20px;
+    
+  
     font-family: "Changa-Regular";
 }
-@media (max-width:767px) {
-    .cardAdvisors{
-        display: flex;
-        flex-direction: column;
-    }
+.category__form-select{
+    
+    font-family: "Changa-Regular";
+    max-width: 200px;
+    text-align: center;
+    margin: auto !important;
+    border: 1px solid  rgb(103, 134, 161) !important;
+    
 }
-@media (min-width:768px) and (max-width:991px) {
-    .cardAdvisors {
-        display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2%;
-        }
-}
-@media (min-width:992px) and (max-width:1200px) {
-    .cardAdvisors {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2%;
-    }
-}
+
 .helpYou{
     background-color: #6C757D;
     height: auto;

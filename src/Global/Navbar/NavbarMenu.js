@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './NavbarMenu.module.css'
 import './NavbarMenu.css'
 import Container from 'react-bootstrap/Container';
@@ -12,42 +12,40 @@ import { BsTwitter } from "react-icons/bs";
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Collapse } from 'react-bootstrap';
 import x from "./../../assets/icons/x.svg"
-import { MdNotificationsActive } from "react-icons/md";
 import { useRef } from 'react';
 import Logo from "./../../assets/Images/logo.png"
-import { AuthContext } from "../../Context/AuthContext";
+import { useNavigate } from 'react-router-dom';
+
 
 const NavbarMenu = () => {
+
     const location = useLocation()
+    const navigate = useNavigate();
+    const [token,setToken] = useState("")
 
-
+    useEffect(() => {
+        setToken(localStorage.getItem('token'))
+        token ?  navigate("/") :  navigate("/login") 
+    }, [token])
 
     const toggleNav = useRef();
     const [NavbarSide, setNavbarSide] = useState(false)
     const [openSponsorships, setOpenSponsorships] = useState(false);
-    const authContext = useContext(AuthContext);
-
+     
     useEffect(() => {
         setNavbarSide(false)
     }, [location])
 
-    function logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
-        authContext.setAuth({});
+    function handleAuth(){
+        setToken(localStorage.setItem("token",""))  
     }
+  
 
     return (
         <>
             <header>
                 <Container>
                     <div className={`${styles.header}`}>
-                        <nav className={`${styles.navLink__header}`}>
-                            {/* {authContext.auth.email ? <Link to="/" className={`px-3 pt-2 ${styles.header__link}`} onClick={logout}>تسجيل خروج"</Link> : <Link to="/login" className={`px-3 pt-2 ${styles.header__link}`} > تسجيل الدخول"</Link>}
-                            {authContext.auth.email ? <Link to="" className={`px-3 pt-2 ${styles.header__link}`}> تبرعاتي"</Link> : <Link to="/sign-up" className={`px-3 pt-2 ${styles.header__link}`}> تسجيل"</Link>} */}
-                            {/* <Link to="" className={`px-3 pt-2 ${styles.header__link}`}> تسجيل الدخول </Link> */}
-
-                        </nav>
                         <div className={`pt-2 ${styles.social}`}>
                             <span className='px-2'><BsFacebook /></span>
                             <span className='px-2'><BsYoutube /></span>
@@ -57,9 +55,7 @@ const NavbarMenu = () => {
                     </div>
                 </Container>
             </header>
-
             {['sm'].map((expand) => (
-
                 <Navbar key={expand} expand={expand} className={`${styles.nav}`}>
                     <Container >
 
@@ -120,8 +116,6 @@ const NavbarMenu = () => {
                                 <div className="other-side" onClick={() => { setNavbarSide(false) }}>
                                 </div>
                             </div>
-
-
                         </div>
                         <Navbar.Offcanvas
                             id={`offcanvasNavbar-expand-${expand}`}
@@ -133,18 +127,23 @@ const NavbarMenu = () => {
                                     <NavLink to="/" className={`${styles["main-nav__link"]} main-nav__link`}>الرئيسية</NavLink>
                                     <NavLink to="/advisor" className={`${styles.mainNav__link} main-nav__link`}> استشارات </NavLink>
                                     <NavLink to="/project" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
-                                    {authContext.auth.email ? <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > حسابي </NavLink> : <div className="dropdown">
+                                    
+                                    {token ?
+                                     <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > حسابي </NavLink> 
+                                     : 
+                                     <div className="dropdown">
                                         <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > تسجيل حساب</NavLink>
-
                                         <div className="dropdown-menu show nav__dropdown-list">
                                             <Link className="dropdown-item" to="/signup-advisor"> تسجيل مستشار </Link>
                                             <Link className="dropdown-item" to="/signup">   تسجيل مستفيد</Link>
                                         </div>
                                     </div>}
-                                    {authContext.auth.email ? <NavLink to="/logout" className={` ${styles.mainNav__link} main-nav__link`} onClick={logout}>تسجيل خروج</NavLink> : <NavLink to="/login" className={`${styles.mainNav__link} main-nav__link`}> تسجيل دخول</NavLink>}
 
-
-
+                                    {token&&token? 
+                                       <NavLink  to="/login" className={` ${styles.mainNav__link} main-nav__link`} onClick={()=>{handleAuth()}} >تسجيل خروج</NavLink>
+                                        :
+                                       <NavLink to="/login" className={`${styles.mainNav__link} main-nav__link`}> تسجيل دخول</NavLink>
+                                    }
                                 </Nav>
                             </Offcanvas.Body>
                         </Navbar.Offcanvas>
@@ -155,8 +154,6 @@ const NavbarMenu = () => {
                 </Navbar>
             ))
             }
-
-
         </>
 
     )

@@ -1,7 +1,8 @@
 .logForm {
     display: flex;
     text-align: center;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
+    direction: rtl !important;
 
 }
 
@@ -23,19 +24,20 @@
 }
 
 .signup {
-    width: 60%;
+    width: 70%;
     margin: auto;
     margin-top: 5%;
     border: 1px solid #eee;
     box-shadow: 0 0 4px 0 #c4c4c4da;
-    padding-bottom: 100px;
+    padding-bottom: 40px;
     border-radius: 15px;
     background-color: #eeeeeee0 !important;
 }
 
 .signup__title {
-    margin: 20px 0;
+    margin: 10px 0;
     color: #4d4d4d;
+    font-size: 15px !important;
     font-family: "Changa-SemiBold";
 }
 
@@ -86,6 +88,7 @@
 
 .input::placeholder {
     text-align: right !important;
+    font-size: 14px;
 }
 
 .input:focus {
@@ -101,9 +104,10 @@
 
 .label {
     text-align: right !important;
-    margin-left: 55%;
-    font-size: 20px;
+    display: block;
+    font-size: 18px;
     margin-bottom: 0px !important;
+    font-family: "Changa-Regular" !important;
 }
 
 .signup__btn {
@@ -150,7 +154,7 @@
 
 .signup__btn:hover:before {
     top: -30px;
-    left: -40px;
+    left: -50px;
 }
 
 .signup__btn:active:before {
@@ -171,7 +175,9 @@
 
 
 }
-
+.description-margin{
+    margin: 0px 20px !important;
+}
 
 @media (max-width:767px) {
     .signup {
@@ -205,19 +211,10 @@
         margin-top: -1px;
     }
 }
-
-@media (min-width:1201px) and (max-width:1450px) {
-    .signup {
-        width: 75%;
+@media (min-width:1200px){
+    .description-margin{
+        margin-top: 5rem !important;
     }
-
-    .signup__btn {
-        margin: 0 50%;
-    }
+    
 }
 
-@media (min-width:1451px) {
-    .signup__btn {
-        margin: 0 50%;
-    }
-}

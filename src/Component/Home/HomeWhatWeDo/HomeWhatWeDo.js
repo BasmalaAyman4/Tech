@@ -7,7 +7,7 @@ import img3 from "./../../../assets/Images/whatwedo3.webp"
 import {AiOutlineArrowLeft} from "react-icons/ai";
 const HomeWhatWeDo = () => {
   return (
-    <section className="Latest-news  mt-5 mb-2 pb-3">
+    <section className="Latest-news mt-3 ">
     <div className="container">
          <div className='Latest-news__title-conainer'>
            <h3 className="trending-product__head pb-3">نقدم لك أفكارا ابداعية </h3>

@@ -1,20 +1,27 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
 import style from "./AdvisorsDetails.module.css"
 import eng1 from "./../../assets/Images/team1.png"
 import { MdEmail } from "react-icons/md";
 import { BsTwitter, BsGithub, BsLinkedin } from "react-icons/bs";
 import Chat from "./../../Global/chat/Chat"
-import { AuthContext } from "../../Context/AuthContext"
-import { NavLink } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
+import { useEffect } from 'react';
+
 export default function AdvisorsDetails() {
-    const authContext = useContext(AuthContext);
+
+    const [token,setToken] = useState("")
+   
+    useEffect(() => {
+        setToken(localStorage.getItem('token'))
+        
+    }, [token])
     return (
         <div className={style.all}>
-            {authContext.auth.email ? <NavLink to="/chatwithEng" className={`${style.btn}`}> <span className={`${style.modal__para}`}>  التواصل مباشر </span></NavLink> : <Chat />}
+            {token ? <NavLink to="/chatwithEng" className={`${style.btn}`}> <span className={`${style.modal__para}`}>  التواصل مباشر </span></NavLink> : <Chat />}
             <section className={style.details}>
                 <div className={style.advisorsDetails}>
                     <div className={style.name}>
-                        <img src={eng1} className={style.img} />
+                        <img src={eng1} className={style.img} alt="" />
                         <div>
                             <h4>ايمن محمد</h4>
                             <p>مهندس كهربا</p>

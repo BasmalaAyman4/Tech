@@ -1,46 +1,13 @@
 import React, { useState } from 'react'
 import style from './signUp.module.css'
 import './SignUp.css'
-import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
-import 'react-phone-number-input/style.css'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-
-const data = {
-  countries: [
-    {
-      name: "egypt",
-      states: [
-        {
-          name: "cairo",
-          cities: ["helwan", "maddi", "shobra"]
-        }
-      ]
-    },
-    { name: "usa", states: [{ name: "Gharbiya", cities: ["El Mahalla"] }] },
-
-    { name: "KSA", states: [{ name: "Riyadh", cities: ["Yanbu"] }] },
-    {
-      name: "India",
-      states: [
-        { name: "Tabuk", cities: ["Delhi", "Kolkata", "Mumbai", "Bangalore"] }
-      ]
-    }
-  ]
-};
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import axios from 'axios'
 
 export default function SignUp() {
-
-  const [selectedCountry, setSelectedCountry] = React.useState();
-  const [selectedState, setSelectedState] = React.useState();
-  const [selectedCity, setSelectedCity] = React.useState();
-
-  const availableState = data.countries.find((c) => c.name === selectedCountry);
-  const availableCities = availableState?.states?.find(
-    (s) => s.name === selectedState
-  );
-
-
+  
+    
   const validname = /^[A-Za-z]+$/;
   const validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const validPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -52,24 +19,14 @@ export default function SignUp() {
     confirmPassword: '',
 
   })
-
-  const { userName, email, phone, password, confirmPassword } = formData
+   
+  const { userName, email, password, confirmPassword } = formData
   const [formError, setFormError] = useState({})
 
   const onChangeHandler = e => {
 
     setFormData({ ...formData, [e.target.name]: e.target.value })
     console.log(formData)
-  }
-
-  const onChangeHandlerPhone = data => {
-    setFormData({ ...formData, phone: data })
-    console.log(formData)
-  }
-
-
-  const onSubmitHandler = (e) => {
-    e.preventDefault()
     let err = {}
 
     if (formData.userName === '') {
@@ -94,6 +51,22 @@ export default function SignUp() {
     setFormError({ ...err })
   }
 
+    const reqSignUpLink = "https://jobs.invoacdmy.com/user/create-user"
+    const reqSignUpData = {
+      email: formData.email ,
+      name:formData.userName,
+      password: formData.password ,
+      confirm_password: formData.confirmPassword
+    }
+    
+
+    function onSignUpHandler(event){
+      event.preventDefault();
+      axios.post(reqSignUpLink,reqSignUpData)
+      .then(response => localStorage.setItem("token",response.data.token)).catch((err)=>{console.log(err)})
+      }
+
+
   return (
     <>
       <div className={`${style.path}`}>
@@ -112,7 +85,7 @@ export default function SignUp() {
             <h2 className={style.signup__title}>انشئ حسابك</h2>
             <p className={style.signup__para}>فضلا قم بملء النموذج بالاسفل لانشاء حساب جديد خاص بك<a href='/'>  منصه استشاره تك</a></p>
             <hr />
-            <Form onSubmit={onSubmitHandler} >
+            <Form onSubmit={(event)=>{onSignUpHandler(event)}} >
               <div className={style.userName}>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail" >
@@ -130,6 +103,7 @@ export default function SignUp() {
                     {formError.email}
                   </Form.Text>
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label className={`${style.label}`}> تأكيد كلمه المرور </Form.Label>
                   <Form.Control name="confirmPassword" type="password" autoComplete="off" className={`${style.input}`} placeholder="تأكيد كلمة المرور" onChange={onChangeHandler} value={confirmPassword} />

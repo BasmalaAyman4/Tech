@@ -1,12 +1,17 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import style from './Chat.module.css'
-import { AuthContext } from "../../Context/AuthContext"
+
 export default function Chat() {
-    const authContext = useContext(AuthContext);
+  
     const [modalShow, setModalShow] = useState(false)
     function MyVerticallyCenteredModal(props) {
+        const [token,setToken] = useState("")
+        useEffect(() => {
+            setToken(localStorage.getItem('token'))
+            
+        }, [token])
         return (
 
             <Modal
@@ -17,7 +22,7 @@ export default function Chat() {
                 className={`${style.modal}`}
             >
                 <Modal.Body className={`${style.modal__bodyy}`} >
-                    {authContext.auth.email ? <p>chat</p> : <p className={`${style.para}`}> يجب تسجيل دخول للتواصل معنا <a href='/login' className={`${style.link}`}> تسجل دخول</a></p>}
+                    {!token ?  <p className={`${style.para}`}> يجب تسجيل دخول للتواصل معنا <a href='/login' className={`${style.link}`}> تسجل دخول</a></p> : null}
                 </Modal.Body>
             </Modal>
         );

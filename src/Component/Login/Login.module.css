@@ -47,7 +47,6 @@
     font-size: 17px;
     color: #202020;
     border: 2px solid #999999 !important;
-    width: 500px !important;
     height: 50px;
     margin: 10px auto;
 }
@@ -64,7 +63,7 @@
 }
 .label{
     text-align: right !important;
-    margin-left: 55%;
+    display: block;
 }
 
 .log__btn{
@@ -87,9 +86,9 @@
     background-color: #6786A1;
 }
 .input::placeholder{
-    text-align: left !important;
+    text-align: right !important;
+    font-size: 14px;
 }
-
 .log__btn:before {
     content: "";
     position: absolute;
@@ -111,7 +110,7 @@
 
 .log__btn:hover:before{
     top: -30px;
-    left: -40px;
+    left: -50px;
 }
 
 .log__btn:active:before{
@@ -140,7 +139,6 @@
     list-style: none;
     display: flex;
     justify-content: space-around;
-
     padding: 0 !important;
     margin-top: 10px !important;
     
@@ -157,7 +155,7 @@
     color: #E68500;
 }
 .user__link{
-background-color: #E68500;
+    background-color: #E68500;
     padding: 10px 20px;
     border: 2px solid #E68500;
     border-radius: 15px;
@@ -173,6 +171,11 @@ background-color: #E68500;
     font-size: 12px !important;
     font-family: "Changa-Regular";
     font-weight: bold;
+
+}
+.modal__mess-err{
+    text-align: center !important;
+    font-family: "Changa-Regular" !important;
 
 }
 @media (max-width:767px) {

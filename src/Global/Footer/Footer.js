@@ -124,9 +124,9 @@ export default function Footer() {
                 </section>
 
                 <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
-                    © 2021 Copyright:
-                    <Link className='text-reset fw-bold' to='https://mdbootstrap.com/'>
-                        Etrk Athr
+                    © 2021 Copyright: 
+                    <Link className='text-reset fw-bold ' to='https://mdbootstrap.com/'>
+                        Estashara Tech
                     </Link>
                 </div>
             </MDBFooter>

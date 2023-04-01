@@ -19,3 +19,15 @@
     color: #fff;
     font-family: "Changa-Regular";
 }
+.input-login_container{
+    max-width: 500px !important;
+    margin: auto;
+}
+.modal.show .modal-dialog {
+    transform: translateY(50px) !important;
+}
+
+
+.modal-header {
+    flex-direction: column-reverse;
+}
