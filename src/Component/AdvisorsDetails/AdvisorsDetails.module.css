@@ -6,7 +6,7 @@
 .details{
     background-color: #fff !important;
     box-shadow: inset 2px 5px 10px rgba(182, 182, 182, 0.61) !important;
-    width: 60%;
+    min-width: 50%;
     margin: 50px auto;
     border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -97,4 +97,23 @@ padding-left: 10px;
     text-align: center;
     margin-top: 10px;
     
+}
+@media (min-width:1260px) {
+    .details{
+        width: 60%;
+    }
+    
+}
+@media (max-width:767px) {
+    .img{
+        width: 100px;
+        height: 100px;
+    }
+        .name{
+            display: flex;
+            flex-direction: column;
+        }
+                .advisorsDetails{
+                    padding: 20px 10px;
+                }
 }

@@ -77,10 +77,10 @@ const NavbarMenu = () => {
                                             <NavLink className="nav-link nav-link__nav-toggle" to="/" href="index.html">الرئيسية </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink className="nav-link nav-link__nav-toggle" to="/projects" href="index.html">استشارات </NavLink>
+                                            <NavLink className="nav-link nav-link__nav-toggle" to="/advisor" href="index.html">استشارات </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink className="nav-link nav-link__nav-toggle" to="/event" href="index.html">  تواصل معنا </NavLink>
+                                            <NavLink className="nav-link nav-link__nav-toggle" to="/contactUs" href="index.html">  تواصل معنا </NavLink>
                                         </li>
 
                                         <li>
@@ -95,23 +95,17 @@ const NavbarMenu = () => {
                                             <Collapse in={openSponsorships}>
                                                 <div id="Sponsorships">
                                                     <ul className=" nav-side_dropdown " >
-                                                        <li>  <NavLink className="dropdown-item dropdown-item__nav-toggle" to="/Blog"> تسجيل مستشار  </NavLink></li>
-                                                        <li>  <NavLink className="dropdown-item  dropdown-item__nav-toggle" to="/BlogDetails"> تسجيل مستفيد</NavLink></li>
+                                                        <li>  <NavLink className="dropdown-item dropdown-item__nav-toggle" to="/signup-advisor"> تسجيل مستشار  </NavLink></li>
+                                                        <li>  <NavLink className="dropdown-item  dropdown-item__nav-toggle" to="/signup"> تسجيل مستفيد</NavLink></li>
                                                     </ul>
                                                 </div>
                                             </Collapse>
                                         </li>
 
                                         <li>
-                                            <NavLink className="nav-link nav-link__nav-toggle" to="/tgf" href="index.html"> تسجيل دخول</NavLink>
+                                            <NavLink className="nav-link nav-link__nav-toggle" to="/login" href="index.html"> تسجيل دخول</NavLink>
                                         </li>
-
-
-
-
                                     </ul>
-
-
                                 </div>
                                 <div className="other-side" onClick={() => { setNavbarSide(false) }}>
                                 </div>
@@ -126,10 +120,10 @@ const NavbarMenu = () => {
                                 <Nav className={` flex-grow-1 p-2 ${styles.nav__dir} `} >
                                     <NavLink to="/" className={`${styles["main-nav__link"]} main-nav__link`}>الرئيسية</NavLink>
                                     <NavLink to="/advisor" className={`${styles.mainNav__link} main-nav__link`}> استشارات </NavLink>
-                                    <NavLink to="/project" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
+                                    <NavLink to="/contactUs" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
                                     
                                     {token ?
-                                     <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > حسابي </NavLink> 
+                                     <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  to="/provider-update" > حسابي </NavLink> 
                                      : 
                                      <div className="dropdown">
                                         <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > تسجيل حساب</NavLink>

@@ -30,6 +30,7 @@
     color: #fff;
     font-family: "Changa-Regular";
     text-align: center;
+    margin-top: 100px;
 }
 .helpYou__icon{
     display: flex;
@@ -47,4 +48,10 @@
     -ms-border-radius: 25px;
     -o-border-radius: 25px;
     margin-bottom:20px;
+}
+@media (max-width:767px) {
+    .helpYou__icon{
+        display: flex;
+        flex-direction: column;
+    }
 }

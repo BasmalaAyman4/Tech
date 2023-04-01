@@ -7,7 +7,9 @@ import Advisors from "../Component/Advisors/Advisors";
 import Details from "./../Component/AdvisorsDetails/AdvisorsDetails"
 import Home from "../Component/pages/Home";
 import ChatWithEng from "../Component/ChatWithEng/ChatWithEng";
-
+import ContactUs from "../Component/ContactUs/ContactUs";
+import UserUpdate from "../Component/UserUpdate/UserUpdate";
+import ProviderUpdate from "../Component/ProviderUpdate/ProviderUpdate";
 export default function Router() {
   
   const token = localStorage.getItem("token")
@@ -23,6 +25,9 @@ export default function Router() {
         <Route path="/details/:id" element={<Details />} />
         <Route path="/" element={<Home />} />
         <Route path="/chatwithEng" element={<ChatWithEng />} />
+        <Route path="/contactUs" element={<ContactUs />} />
+        <Route path="/user-update" element={<UserUpdate />} />
+        <Route path="/provider-update" element={<ProviderUpdate />} />
       </Routes>
     </>
   )
