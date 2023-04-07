@@ -20,10 +20,15 @@ export default function Advisors() {
     const handleFilterProviders = (e) => {
         setSpecializationId(e.target.value)
         console.log(e.target.value)
-        specializationId === '' ? 
+        e.target.value === '' ? 
            setfilterLink("https://jobs.invoacdmy.com/provider/all-providers?page=1") 
            : 
-           setfilterLink(`https://jobs.invoacdmy.com/provider/all-category-providers/${specializationId}`) 
+           setfilterLink(`https://jobs.invoacdmy.com/provider/all-category-providers/${e.target.value}`) 
+     
+    }
+      
+    useEffect(() => {
+
         axios.get(filterLink,{
             headers: {
               "Accept-Language" : `ar`
@@ -33,17 +38,28 @@ export default function Advisors() {
              setProvidersArray(response.data.data.data)
         )
         .catch((err)=>{console.log(err)})
-    }
+        
+    },[filterLink])
     
     useEffect(() => {
-        axios.get("https://jobs.invoacdmy.com/category/all-categories",{headers: {"Accept-Language" : `ar`}}).then(response => 
-        setCategoriesArray(response.data.data)
-        ).catch((err)=>{console.log(err)})
-        axios.get("https://jobs.invoacdmy.com/provider/all-providers?page=1",
+
+        axios.get("https://jobs.invoacdmy.com/category/all-categories",
         {headers: {"Accept-Language" : `ar`}})
         .then(response => 
-        setProvidersArray(response.data.data.data)
+           setCategoriesArray(response.data.data)
         ).catch((err)=>{console.log(err)})
+
+        
+        axios.get("https://jobs.invoacdmy.com/provider/all-providers?page=1",{
+            headers: {
+              "Accept-Language" : `ar`
+            }
+          })
+          .then(response => 
+             setProvidersArray(response.data.data.data)
+        )
+        .catch((err)=>{console.log(err)})
+
     },[])
 
 

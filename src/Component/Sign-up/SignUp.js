@@ -4,13 +4,18 @@ import './SignUp.css'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import axios from 'axios'
-
+import { Link, useNavigate } from 'react-router-dom';
+import { Modal } from 'react-bootstrap'
 export default function SignUp() {
   
     
   const validname = /^[A-Za-z]+$/;
   const validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const validPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+  const [errResponse,seterrResponse] = useState("")
+  const handleClose = () => setShow(false);
   const [formData, setFormData] = useState({
     userName: '',
     email: '',
@@ -26,7 +31,9 @@ export default function SignUp() {
   const onChangeHandler = e => {
 
     setFormData({ ...formData, [e.target.name]: e.target.value })
-    console.log(formData)
+    
+  }
+   const handleSignUpMesErr = () =>{
     let err = {}
 
     if (formData.userName === '') {
@@ -41,16 +48,12 @@ export default function SignUp() {
     }
     if (formData.password === '') {
       err.password = "كلمه السر مطلوبه"
-    } else if (!validPass.test(password)) {
-      err.password = 'Minimum eight characters, at least one letter and one number';
-
-    }
+    } 
     if (formData.confirmPassword !== formData.password) {
       err.confirmPassword = "تأكيد كلمه السر لا تتطابق"
     }
     setFormError({ ...err })
-  }
-
+   }
     const reqSignUpLink = "https://jobs.invoacdmy.com/user/create-user"
     const reqSignUpData = {
       email: formData.email ,
@@ -59,16 +62,53 @@ export default function SignUp() {
       confirm_password: formData.confirmPassword
     }
     
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    const handleRedirect = async () => {
+            await delay(1500);
+         
+        if(localStorage.getItem("token")){
+            window.location.reload();
+            navigate("/")
+        }else {
+            navigate("/login") 
+        }
+     }
 
     function onSignUpHandler(event){
       event.preventDefault();
+      handleSignUpMesErr()
       axios.post(reqSignUpLink,reqSignUpData)
-      .then(response => localStorage.setItem("token",response.data.token)).catch((err)=>{console.log(err)})
-      }
+      .then((response)=> {
+        localStorage.setItem("token",response.data.data.token)
+        setShow(true)
+        seterrResponse(response.data.message)
+        handleRedirect()
+      })
+      .catch((err)=>{
+        setShow(true)
+        seterrResponse(err.response.data.message)
+      })
+    }
 
 
   return (
     <>
+      <Modal className={`${style['modal__mess-err']}`} show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>مرحبا بك </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {errResponse}
+                </Modal.Body>
+                <Modal.Footer className='justify-content-around'>
+                <Link to="/signup" onClick={handleClose}>
+                    انشاء حساب مستخدم 
+                </Link>
+                <Link to="/signup-advisor" onClick={handleClose}>
+                    انشاء حساب مستشار 
+                </Link>
+                </Modal.Footer>
+            </Modal>
       <div className={`${style.path}`}>
         <nav aria-label="breadcrumb" class="breadcrumb d-flex justify-content-between container" dir='rtl'>
           <ol class="breadcrumb">

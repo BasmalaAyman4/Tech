@@ -15,22 +15,34 @@ import x from "./../../assets/icons/x.svg"
 import { useRef } from 'react';
 import Logo from "./../../assets/Images/logo.png"
 import { useNavigate } from 'react-router-dom';
-
+import jwt_decode from "jwt-decode";
 
 const NavbarMenu = () => {
-
+   
     const location = useLocation()
     const navigate = useNavigate();
-    const [token,setToken] = useState("")
-
-    useEffect(() => {
-        setToken(localStorage.getItem('token'))
-        token ?  navigate("/") :  navigate("/login") 
-    }, [token])
-
+    const [token,setToken] = useState(localStorage.getItem('token'))
+    const [userType,setUserType] = useState()
     const toggleNav = useRef();
     const [NavbarSide, setNavbarSide] = useState(false)
     const [openSponsorships, setOpenSponsorships] = useState(false);
+    const [userTypeDetails,setUserTypeDetails]=useState({})
+
+    useEffect(() => {
+        if(token){
+            navigate("/")
+            const decoded = jwt_decode(token)
+            setUserTypeDetails(decoded)
+            console.log( decoded)
+         
+            decoded.user_type === 'user' ? setUserType('user') : setUserType('provider')
+            }else {
+                navigate("/login") 
+            }
+            
+    }, [token])
+
+    
      
     useEffect(() => {
         setNavbarSide(false)
@@ -123,7 +135,10 @@ const NavbarMenu = () => {
                                     <NavLink to="/contactUs" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
                                     
                                     {token ?
-                                     <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  to="/provider-update" > حسابي </NavLink> 
+                                      userType === 'user' ? 
+                                       <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  to={`/user-update/${userTypeDetails.user_id}`} > حسابي </NavLink> 
+                                       :
+                                       <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  to={`/provider-update/${userTypeDetails.user_id}`} > حسابي </NavLink>
                                      : 
                                      <div className="dropdown">
                                         <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  > تسجيل حساب</NavLink>

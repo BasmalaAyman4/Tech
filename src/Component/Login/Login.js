@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './Login.module.css'
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.css';
 import "./login.css"
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 export default function Login() {
 
     const validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -20,56 +20,22 @@ export default function Login() {
     const { email, password } = formData
     const [formError, setFormError] = useState({})
     const [show, setShow] = useState(false);
-
+    const navigate = useNavigate();
+    const [token,setToken] = useState(localStorage.getItem('token'))
     const handleClose = () => setShow(false);
 
     function handleErrors(){
-                if(!formData.email || !formData.password ){
-                    if(!formData.email){
-                        setFormError(prevValue=>{ 
-                            return{
-                                ...prevValue,
-                                email: "this field is required"
-                            }
-                        })
-                    }
-                    else if(formData.email &&!validEmail.test(formData.email)){
-                        setFormError(prevValue=>{ 
-                            return{
-                            ...prevValue,
-                            email: "Email is invalid" 
-                            }
-                        })
-                    }     
-                    else{
-                        setFormError(prevValue=>{ 
-                            return{
-                            ...prevValue,
-                            email: ""
-                            
-                            } 
-                        })
-                    }
-                
-                    if(!formData.password){
-                        setFormError(prevValue=>{ 
-                            return{
-                            ...prevValue,
-                            password: "this field is required"
-                            } 
-                        })
-                    } else{
-                        setFormError(prevValue=>{ 
-                            return{
-                            ...prevValue,
-                            password: ""
-                            
-                            } 
-                        })
-                    }
-                } else{
-                    setFormError({})
-                }     
+        let err = {}
+        if (formData.email === '') {
+          err.email = "بريد الكتروني مطلوب";
+        } else if (!validEmail.test(email)) {
+          err.email = "بريد الكتروني غير صحيح";
+        }
+        if (formData.password === '') {
+          err.password = "كلمه السر مطلوبه"
+        } 
+      
+        setFormError({ ...err })
     }
   
     const onChangeHandler = e => {
@@ -82,22 +48,39 @@ export default function Login() {
         email: formData.email ,
         password: formData.password ,
     }
-   
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    const handleRedirect = async () => {
+            await delay(1500);
+         
+        if(localStorage.getItem("token")){
+            window.location.reload();
+            navigate("/")
+        }else {
+            navigate("/login") 
+        }
+     }
     function handleLoginSubmit(event){
       event.preventDefault();
+      handleErrors()
       axios.post(reqLoginLink,reqLoginData)
-      .then(response => localStorage.setItem("token",response.data.token))
+      .then((response) =>{
+         localStorage.setItem("token",response.data.data.token)
+         setShow(true)
+         seterrResponse(response.data.message)
+         handleRedirect()
+      })
       .catch((err)=>{
         setShow(true)
         seterrResponse(err.response.data.message)
     })
+   
     }
   
     return (
         <>
             <Modal className={`${style['modal__mess-err']}`} show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                <Modal.Title>عذرا </Modal.Title>
+                <Modal.Title>مرحبا بك </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {errResponse}

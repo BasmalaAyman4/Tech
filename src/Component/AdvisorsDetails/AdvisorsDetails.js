@@ -4,16 +4,24 @@ import eng1 from "./../../assets/Images/team1.png"
 import { MdEmail } from "react-icons/md";
 import { BsTwitter, BsGithub, BsLinkedin } from "react-icons/bs";
 import Chat from "./../../Global/chat/Chat"
-import { NavLink} from 'react-router-dom';
+import { Link, NavLink, useParams} from 'react-router-dom';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 export default function AdvisorsDetails() {
 
     const [token,setToken] = useState("")
-   
+    const [provider,setProvider] = useState("")
+    const providerId = useParams()
+    const id = providerId.id
+    useEffect(() => {
+        axios.get(`https://jobs.invoacdmy.com/provider/single-provider/${id}`)
+        .then(response => 
+       setProvider(response.data.data)
+        ).catch((err)=>{console.log(err)})
+    }, [])
     useEffect(() => {
         setToken(localStorage.getItem('token'))
-        
     }, [token])
     return (
         <div className={style.all}>
@@ -21,15 +29,15 @@ export default function AdvisorsDetails() {
             <section className={style.details}>
                 <div className={style.advisorsDetails}>
                     <div className={style.name}>
-                        <img src={eng1} className={style.img} alt="" />
+                        <img src={provider.personal_photo} className={style.img} alt="" />
                         <div>
-                            <h4>ايمن محمد</h4>
+                            <h4>{provider.name} </h4>
                             <p>مهندس كهربا</p>
                         </div>
                     </div>
                     <div className={style.contact}>
                         <div className={style.contactIcon}>
-                            <p><MdEmail /> john@example.com</p>
+                            <p><MdEmail />{provider.email} </p>
                         </div>
                         <div className={style.contactIcon}>
                             <p><BsTwitter /> twitter.com/404</p>
@@ -43,33 +51,29 @@ export default function AdvisorsDetails() {
                     </div>
                 </div>
                 <div className={style.career}>
-                    <h4 className={style.careerTitle} dir="rtl">المسمى الوظيفي:</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <h4 className={style.careerTitle} >المسمى الوظيفي:</h4>
+                    <p>{provider.description}</p>
+                
                 </div>
                 <div className={style.career}>
-                    <h4 className={style.careerTitle} dir="rtl">الخبرة المهنية :</h4>
-                    <h5 className={style.careerDate}>April 2022 - July 2022</h5>
-                    <p className={style.job}>Front-End Developer (FREELANCER)</p>
-                    <p className={style.jobPara}>- Worked with many people in different countries.</p>
-                    <p className={style.jobPara}>- Built different front-end Projects in JavaScript</p>
-                    <h5 className={style.careerDate}>April 2022 - July 2022</h5>
-                    <p className={style.job}>Front-End Developer (FREELANCER)</p>
-                    <p className={style.jobPara}>- Worked with many people in different countries.</p>
-                    <p className={style.jobPara}>- Built different front-end Projects in JavaScript</p>
-                    <h5 className={style.careerDate}>April 2022 - July 2022</h5>
-                    <p className={style.job}>Front-End Developer (FREELANCER)</p>
-                    <p className={style.jobPara}>- Worked with many people in different countries.</p>
-                    <p className={style.jobPara}>- Built different front-end Projects in JavaScript</p>
+                    <h4 className={style.careerTitle} >الخبرة المهنية :</h4>
+                    <h5 className={style.careerDate}>السيره الذاتيه</h5>
+                    <Link to={provider.resume_file} > cv </Link>   
+                
+                    <h5 className={style.careerDate}>الدرجه العمليه</h5>
+                    <p className={style.job}>
+                        {provider.scientific_degree ==="master" ? "ماجستير"
+                        : provider.scientific_degree === "university" ? 
+                        "جامعي":"دكتوراه"
+                        }
+                    </p>
+                    <h5 className={style.careerDate}>الوظيفة الحالية</h5>
+                    <p className={style.job}>{provider.current_job}</p>
+                    <h5 className={style.careerDate}>النوع</h5>
+                    <p className={style.job}>{provider.gender !== "male"? "انثي" : "ذكر"}</p>
+                 
                 </div>
-                <div className={style.career}>
-                    <h4 className={style.careerTitle} dir="rtl">المهارات الشخصية :</h4>
-                    <div className={style.skills}>
-                        <p>- HTML</p>
-                        <p>- CSS</p>
-                        <p>- JavaScript</p>
-                        <p>- ReactJs</p>
-                    </div>
-                </div>
+           
             </section>
         </div>
     )

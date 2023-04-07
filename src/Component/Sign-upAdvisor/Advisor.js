@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from './Advisor.module.css'
 import '../Sign-up/SignUp.css'
-import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
-import 'react-phone-number-input/style.css'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios'
 import { Modal } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function Advisor() {
 
@@ -15,7 +13,7 @@ export default function Advisor() {
     const validname = /^[A-Za-z]+$/;
     const validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     // const validPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-   
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -103,20 +101,27 @@ export default function Advisor() {
             err.confirmPassword = "تأكيد كلمه المرور لا تتطابق"
         }
         if (formData.scientificDegree === '') {
-            err.scientificDegree = "Required Failed"
+            err.scientificDegree = "هذا الحقل مطلوب"
         }
         if (formData.resumeFile === '') {
-            err.resumeFile = "Required Failed"
+            err.resumeFile =  "هذا الحقل مطلوب"
         }
         if (formData.personalPhoto === '') {
-            err.personalPhoto = "Required Failed"
+            err.personalPhoto =  "هذا الحقل مطلوب"
         }
         if (formData.currentJob === '') {
-            err.currentJob = "Required Failed"
+            err.currentJob =  "هذا الحقل مطلوب"
         }
         if (formData.experience === '') {
-            err.experience = "Required Failed"
+            err.experience =  "هذا الحقل مطلوب"
         }
+        if (formData.SpecializationId === '') {
+            err.SpecializationId =  "هذا الحقل مطلوب"
+        }
+        if (formData.gender === '') {
+            err.gender =  "هذا الحقل مطلوب"
+        }
+        
         setFormError({ ...err })
         
 
@@ -134,20 +139,20 @@ export default function Advisor() {
     reqSignUpData.append("gender", formData.gender);
     reqSignUpData.append("description", formData.experience);
     reqSignUpData.append("current_job", formData.currentJob);
-    // const reqSignUpData1 = {
-    //     name: formData.name ,
-    //     email: formData.email ,
-    //     scientific_degree:formData.scientificDegree,
-    //     password:formData.password,
-    //     confirm_password:formData.confirmPassword,
-    //     category_id:formData.SpecializationId,
-    //     personal_photo:formData.personalPhoto,
-    //     resume_file:formData.resumeFile,
-    //     gender:formData.gender,
-    //     description:formData.experience,
-    //     current_job:formData.currentJob
-    // }
-   
+
+
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    const handleRedirect = async () => {
+            await delay(1500);
+         
+        if(localStorage.getItem("token")){
+            window.location.reload();
+            navigate("/")
+        }else {
+            navigate("/login") 
+        }
+     }
+
     const onSubmitHandler = (event) => {
         event.preventDefault();
         handleError()
@@ -159,9 +164,10 @@ export default function Advisor() {
             }
           })
         .then((response) =>{
-             localStorage.setItem("token",response.data.token)
-             setShow(true)
-             seterrResponse(response.data.message)
+            localStorage.setItem("token",response.data.data.token)
+            setShow(true)
+            seterrResponse(response.data.message)
+            handleRedirect()
         })
         .catch((err)=>{
           setShow(true)
@@ -231,7 +237,9 @@ export default function Advisor() {
                                             <option value={`master`}>ماجستير</option>
                                             <option value={`phd`}>الدكتورا</option>
                                         </select>
-                                    
+                                        <Form.Text className={`${style.msErr}`}>
+                                            {formError.scientificDegree}
+                                        </Form.Text>
                                     </Form.Group>
                                     
                                     <Form.Group className="mb-2" controlId="Specialization">
@@ -249,6 +257,9 @@ export default function Advisor() {
                                             ))}
 
                                         </select>
+                                        <Form.Text className={`${style.msErr}`}>
+                                            {formError.SpecializationId}
+                                        </Form.Text>
                                     </Form.Group>
 
                                     <Form.Group className="mb-2" controlId="password">
@@ -279,6 +290,9 @@ export default function Advisor() {
                                             <option value={'male'}>ذكر</option>
                                             <option value={'female'}>انثي</option>
                                         </select>
+                                        <Form.Text className={`${style.msErr}`}>
+                                            {formError.gender}
+                                        </Form.Text>
                                     </Form.Group>
 
                                     <Form.Group className="mb-2" controlId="resumeFile" >

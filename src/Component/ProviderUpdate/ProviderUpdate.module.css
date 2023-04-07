@@ -2,6 +2,7 @@
     display: flex;
     text-align: center;
     padding-bottom: 50px;
+    background-image: url(../../assets/Images/bg-pattern.jpg) !important
 
 }
 
@@ -17,11 +18,16 @@
 
 .userName {
     display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2%;
     margin: 50px 0;
 }
-
+.msErr{
+    color: rgba(209, 3, 3, 0.938) !important;
+    font-size: 12px !important;
+    font-family: "Changa-Regular";
+    font-weight: bold;
+}
 .login {
     position: relative;
     width: 100% !important;
@@ -33,6 +39,7 @@
     padding-bottom: 30px;
     border-radius: 5px;
     font-family: "Changa-Regular" !important;
+    
 }
 
 .loginPara {

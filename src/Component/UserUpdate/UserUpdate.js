@@ -2,22 +2,35 @@ import React, { useEffect, useState } from 'react'
 import { useRef } from "react";
 import style from "./UserUpdate.module.css"
 import Form from 'react-bootstrap/Form';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 export default function UserUpdate() {
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
+    const [user, setUser] = useState({});
     const fileInputRef = useRef();
-    useEffect(() => {
-        if (image) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                setPreview(reader.result)
-            };
-            reader.readAsDataURL(image);
-        } else {
-            setPreview(null)
-        }
-    }, [image])
-
+    const [token,setToken] = useState(localStorage.getItem("token"))
+    //  useEffect(() => {
+    //     if (image) {
+    //         const reader = new FileReader();
+    //         reader.onload = () => {
+    //             setPreview(reader.result)
+    //         };
+    //         reader.readAsDataURL(image);
+    //     } else {
+    //         setPreview(null)
+    //     }
+    // }, [image])
+    const providerId = useParams()
+    const id = providerId.id
+    
+    useEffect(()=>{
+       
+        axios.get(`https://jobs.invoacdmy.com/user/single-user/${id}`,{headers: {"Authorization" : `Bearer ${token}`}})
+        .then(response => 
+            console.log(response.data.data,"user")
+        ).catch((err)=>{console.log(err)})
+    },[])
     const [formData, setFormData] = useState({
         userName: '',
         email: '',
@@ -29,7 +42,7 @@ export default function UserUpdate() {
     const onChangeHandler = e => {
 
         setFormData({ ...formData, [e.target.name]: e.target.value })
-        console.log(formData)
+       
 
     }
 
