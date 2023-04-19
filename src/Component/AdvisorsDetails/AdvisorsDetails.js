@@ -12,49 +12,45 @@ export default function AdvisorsDetails() {
 
     const [token,setToken] = useState("")
     const [provider,setProvider] = useState("")
+    const [providerCategory,setProviderCategory]= useState("")
     const providerId = useParams()
     const id = providerId.id
     useEffect(() => {
-        axios.get(`https://jobs.invoacdmy.com/provider/single-provider/${id}`)
-        .then(response => 
-       setProvider(response.data.data)
-        ).catch((err)=>{console.log(err)})
+        axios.get(`https://jobs.invoacdmy.com/provider/single-provider/${id}`,{headers: {"Accept-Language" : `ar`}})
+        .then((response) => {    
+        setProvider(response.data.data)
+        setProviderCategory(response.data.data.category_id?.title)
+
+    }).catch((err)=>{console.log(err)})
     }, [])
     useEffect(() => {
         setToken(localStorage.getItem('token'))
     }, [token])
     return (
         <div className={style.all}>
-            {token ? <NavLink to="/chatwithEng" className={`${style.btn}`}> <span className={`${style.modal__para}`}>  التواصل مباشر </span></NavLink> : <Chat />}
-            <section className={style.details}>
+            {token ? <NavLink to={`/chatwithEng/${id}`} className={`${style.btn}`}> <span className={`${style.modal__para}`}>  التواصل مباشر </span></NavLink> : <Chat />}
+           
+                <div className='container'>
+                <section className={style.details}>
                 <div className={style.advisorsDetails}>
                     <div className={style.name}>
-                        <img src={provider.personal_photo} className={style.img} alt="" />
+                        <img src={provider?.personal_photo} className={style.img} alt="" />
                         <div>
-                            <h4>{provider.name} </h4>
-                            <p>مهندس كهربا</p>
+                            <h4>{provider?.name} </h4>
+                            <p>{providerCategory} </p>
+                            <p className='d-flex align-items-center justify-content-between'>
+                                {provider?.email} 
+                                <MdEmail /> 
+                            </p>
                         </div>
                     </div>
-                    <div className={style.contact}>
-                        <div className={style.contactIcon}>
-                            <p><MdEmail />{provider.email} </p>
-                        </div>
-                        <div className={style.contactIcon}>
-                            <p><BsTwitter /> twitter.com/404</p>
-                        </div>
-                        <div className={style.contactIcon}>
-                            <p><BsGithub /> github.com/404</p>
-                        </div>
-                        <div className={style.contactIcon}>
-                            <p><BsLinkedin /> linkedin.com/in/note</p>
-                        </div>
-                    </div>
+                    
                 </div>
-                <div className={style.career}>
+                {/* <div className={style.career}>
                     <h4 className={style.careerTitle} >المسمى الوظيفي:</h4>
-                    <p>{provider.description}</p>
+                    <p>{provider?.description}</p>
                 
-                </div>
+                </div> */}
                 <div className={style.career}>
                     <h4 className={style.careerTitle} >الخبرة المهنية :</h4>
                     <h5 className={style.careerDate}>السيره الذاتيه</h5>
@@ -62,19 +58,22 @@ export default function AdvisorsDetails() {
                 
                     <h5 className={style.careerDate}>الدرجه العمليه</h5>
                     <p className={style.job}>
-                        {provider.scientific_degree ==="master" ? "ماجستير"
-                        : provider.scientific_degree === "university" ? 
+                        {provider?.scientific_degree ==="master" ? "ماجستير"
+                        : provider?.scientific_degree === "university" ? 
                         "جامعي":"دكتوراه"
                         }
                     </p>
                     <h5 className={style.careerDate}>الوظيفة الحالية</h5>
-                    <p className={style.job}>{provider.current_job}</p>
+                    <p className={style.job}>{provider?.current_job}</p>
                     <h5 className={style.careerDate}>النوع</h5>
-                    <p className={style.job}>{provider.gender !== "male"? "انثي" : "ذكر"}</p>
-                 
+                    <p className={style.job}>{provider?.gender !== "male"? "انثي" : "ذكر"}</p>
+                    <h5 className={style.careerDate}> نبذه </h5>
+                    <p>{provider?.description}</p>
+                     
+                </div>
+                </section>
                 </div>
            
-            </section>
         </div>
     )
 }

@@ -1,12 +1,12 @@
 .chat-with-eng{
     background-image: url(../../assets/Images/bg-pattern.jpg);
-    height: 800px;
     width: 100%;
     padding-top: 30px;
+    padding-bottom: 60px;
 }
 .chat-with-eng__container{
     max-height: 800px;
-    width: 90%;
+
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     background-color: #fff;
@@ -30,8 +30,6 @@
     width: 30px;
     height: 30px;
     font-weight: 500;
-  
-    
 }
 
 .chat-with-eng__nav:hover svg{

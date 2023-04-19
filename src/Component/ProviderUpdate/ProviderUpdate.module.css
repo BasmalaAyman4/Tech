@@ -66,10 +66,10 @@
     transition: 300ms ease-in-out;
     font-size: 17px;
     color: #202020;
-    border: 2px solid #535151 !important;
-    width: 500px !important;
+    border: 2px solid #adadadb6 !important;
+    width: 93% !important;
     height: 50px;
-    margin: 10px auto;
+    margin: 0px auto;
     
 }
 
@@ -86,7 +86,8 @@
 
 .label {
     text-align: right !important;
-    margin-left: 50%;
+    display: block;
+   padding: 0px 25px;
 
 }
 
@@ -101,7 +102,7 @@
     width: 200px !important;
     height: 2.6em;
     line-height: 2.5em;
-    margin-left: 70%;
+   
     margin-top: 30px;
     position: relative;
     overflow: hidden;
@@ -124,8 +125,8 @@
     position: absolute;
     z-index: -1;
     background: #fff;
-    height: 150px;
-    width: 200px;
+    height: 100px;
+    width: 100px;
     border-radius: 50%;
 }
 
@@ -275,16 +276,14 @@
             left: 50% !important;
         }
     
-        .label {
-            margin-left: 50%;
-        }
+      
     
         .label {
             margin-top: 15px;
         }
     
         .log__btn {
-            margin-top: 50px !important;
+            margin-top: 0px !important;
         }
 }
 
@@ -308,17 +307,10 @@
                     left: 70% !important;
                 }
         
-                .label {
-                    margin-left: 50%;
-                }
-        
-                .label {
-                    margin-top: 15px;
-                }
-        
+          
                 .log__btn {
-                    margin-top: 50px !important;
-                    margin-left: 5% !important;
+                    margin-top: 20px !important;
+                  
                 }
 }
 

@@ -1,7 +1,9 @@
 .cardDeck {
     width: 100% !important;
 }
-
+.card-img-top{
+    height: 300px !important;
+}
 @media (max-width:767px) {
     .cardDeck {
             margin: auto;

@@ -5,7 +5,8 @@ import Form from 'react-bootstrap/Form';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
-import { Modal } from 'react-bootstrap';
+import { Modal} from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
 export default function ProviderUpdate() {
     const validname = /^[A-Za-z]+$/;
     const validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -44,11 +45,6 @@ export default function ProviderUpdate() {
     const [provider,setProvider] = useState("")
     const [specializationId,setSpecializationId] = useState("")
 
-    const [errResponse,seterrResponse] = useState("")
-    const [show, setShow] = useState(false);
-   
-    const handleClose = () => setShow(false);
-
     const [categoriesArray,setCategoriesArray]= useState([])
     const providerId = useParams()
     const userId = providerId.id
@@ -70,8 +66,12 @@ export default function ProviderUpdate() {
                 experience:response.data.data.description,
                 currentJob:response.data.data.current_job
             })
-            console.log(formData,"gg")
-        }).catch((err)=>{console.log(err)})
+      
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+
    
         axios.get("https://jobs.invoacdmy.com/category/all-categories",
         {
@@ -79,9 +79,12 @@ export default function ProviderUpdate() {
                 "Accept-Language" : `ar`
             }
         })
-        .then(response => 
+        .then((response) => {
             setCategoriesArray(response.data.data)
-        ).catch((err)=>{console.log(err)})
+            
+    }).catch((err)=>{
+        console.log(err)
+    })
     
     }, [])
    
@@ -178,27 +181,33 @@ export default function ProviderUpdate() {
         setFormData({ ...formData, [e.target.name]: e.target.value })
         console.log(formData)
     }
-    
-    const updateProfileLink = `https://jobs.invoacdmy.com/provider/update-provider/${userId}`
     const updateProfileData = new FormData();
+    const updateProfileLink = `https://jobs.invoacdmy.com/provider/update-provider/${userId}`
+    
+
     updateProfileData.append("name", formData.name);
     updateProfileData.append("email", formData.email);
     updateProfileData.append("scientific_degree", formData.scientificDegree);
-    // updateProfileData.append("password", formData.password);
-    // updateProfileData.append("confirm_password", formData.confirmPassword);
+    if(formData.password){
+        updateProfileData.append("password", formData.password);
+    }
+    if (formData.confirmPassword) {
+        updateProfileData.append("confirm_password", formData.confirmPassword);
+    }
+
     updateProfileData.append("category_id", formData.SpecializationId);
     updateProfileData.append("personal_photo", formData.personalPhoto);
     updateProfileData.append("resume_file", formData.resumeFile);
     updateProfileData.append("gender", formData.gender);
     updateProfileData.append("description", formData.experience);
     updateProfileData.append("current_job", formData.currentJob);
- 
-
 
 
     const onSubmitHandler = (e) => {
+        const toastId =   toast.loading("Please wait...")
+        setTimeout(() => {toast.dismiss(toastId);}, 1000);
         e.preventDefault()
-        handleError()
+ 
         axios
         .put(updateProfileLink,updateProfileData,{
             headers: {
@@ -207,27 +216,19 @@ export default function ProviderUpdate() {
             }
           })
         .then((response) =>{
-            setShow(true)
-            seterrResponse(response.data.message)
+        
+            toast.success("Successfully Updated!")
            
         })
         .catch((err)=>{
-          setShow(true)
-          seterrResponse(err.response.data.message)
+         
+          toast.error(err.response.data.message)
       })
 
     }
     return (
         <>
-        <Modal className={`${style['modal__mess-err']}`} show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                <Modal.Title>اهلا بك </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {errResponse}
-                </Modal.Body>
-     
-            </Modal>
+      
             <div className={`${style.path}`}>
                 <nav aria-label="breadcrumb" class="breadcrumb d-flex justify-content-between container" dir='rtl'>
                     <ol class="breadcrumb">
@@ -244,19 +245,6 @@ export default function ProviderUpdate() {
                     <div className={style.login}>
                         <p className={style.loginPara}>تعديل الحساب</p>
                         <div >
-                            {/* <div className={`${style.logo}`}>
-                                {preview ? (<img src={preview} alt='' onClick={() => { setImage(null) }} className={`${style.img}`} />) :
-                                    (<button onClick={(event) => { event.preventDefault(); fileInputRef.current.click() }} className={`${style.button}`}> + اضافه صوره </button>)}
-                                <input className={`${style.fileImg}`} type='file' ref={fileInputRef} accept="image/*"
-                                    onChange={(event) => {
-                                        const file = event.target.files[0];
-                                        if (file) {
-                                            setImage(file)
-                                        } else {
-                                            setImage(null)
-                                        }
-                                    }} />
-                            </div> */}
                             <div>
                                        <input className={`${style.fileImg}  input-file-js`} ref={(e)=>{
                     addFileInput.current = e
@@ -292,7 +280,7 @@ export default function ProviderUpdate() {
                             
                                     <Form.Group className="mb-3" controlId="name" >
                                         <Form.Label className={`${style.label}`}> تغيير اسم المستخدم </Form.Label>
-                                        <Form.Control name="name" className={`${style.input}`} placeholder="اسم المستخدم" onChange={onChangeHandler} value={formData.name} />
+                                        <Form.Control name="name" className={`${style.input}`} placeholder="اسم المستخدم" onChange={onChangeHandler} value={formData?.name} />
                                         <Form.Text className={`${style.msErr}`}>
                                             {formError.name}
                                         </Form.Text>  
@@ -300,7 +288,7 @@ export default function ProviderUpdate() {
 
                                     <Form.Group className="mb-3" controlId="email">
                                         <Form.Label className={`${style.label}`}>تغيير البريد الالكتروني   </Form.Label>
-                                        <Form.Control name="email" autoComplete="off" className={`${style.input}`} placeholder=" البريد الإلكتروني" onChange={onChangeHandler} value={formData.email} />
+                                        <Form.Control name="email" autoComplete="off" className={`${style.input}`} placeholder=" البريد الإلكتروني" onChange={onChangeHandler} value={formData?.email} />
                                         <Form.Text className={`${style.msErr}`}>
                                             {formError.email}
                                         </Form.Text>  
@@ -309,7 +297,7 @@ export default function ProviderUpdate() {
                                         <Form.Label className={`${style.label}`}> تغيير الدرجة العلمية   </Form.Label>
                                         <select
                                             placeholder="City"
-                                            value={formData.scientificDegree}
+                                            value={formData?.scientificDegree}
                                             className={`${style.input}`}
                                             name="scientificDegree"
                                             onChange={onChangeHandler}
@@ -320,7 +308,7 @@ export default function ProviderUpdate() {
 
                                         </select>
                                         <Form.Text className={`${style.msErr}`}>
-                                            {formError.scientificDegree}
+                                            {formError?.scientificDegree}
                                         </Form.Text>
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="gender">
@@ -329,13 +317,13 @@ export default function ProviderUpdate() {
                                             placeholder="State"
                                             className={`${style.input}`}
                                             name="gender"
-                                            value={formData.gender}
+                                            value={formData?.gender}
                                             onChange={onChangeHandler}
                                         >
                                             <option value='male'>ذكر</option>
                                             <option value='female'>انثي</option>
                                              <Form.Text className={`${style.msErr}`}>
-                                            {formError.gender}
+                                            {formError?.gender}
                                         </Form.Text>
                                         </select>
                                     </Form.Group>
@@ -344,7 +332,7 @@ export default function ProviderUpdate() {
                                     <Form.Group className="mb-3" controlId="resumeFile" >
                                         <Form.Label className={`${style.label}`}> تغيير السيره الذاتيه </Form.Label>
                                         <Form.Control  name="resumeFile" className={`${style.input}`}  onChange={previewUploadResumeFile} placeholder=" السيره الذاتيه" type='file' />
-                                        <Link to={formData.resumeFile} >CV سيرتك الذاتيه</Link>
+                                        <Link to={formData?.resumeFile} >CV سيرتك الذاتيه</Link>
                                         <Form.Text className={`${style.msErr}`}>
                                             {formError.resumeFile}
                                         </Form.Text>
@@ -352,7 +340,7 @@ export default function ProviderUpdate() {
 
                                     <Form.Group className="mb-3" controlId="currentJob" >
                                         <Form.Label className={`${style.label}`}>تغيير المهنه الحالية </Form.Label>
-                                        <Form.Control name="currentJob" className={`${style.input}`} placeholder=" المهنة الحالية" onChange={onChangeHandler} value={formData.currentJob} />
+                                        <Form.Control name="currentJob" className={`${style.input}`} placeholder=" المهنة الحالية" onChange={onChangeHandler} value={formData?.currentJob} />
                                         <Form.Text className={`${style.msErr}`}>
                                             {formError.currentJob}
                                         </Form.Text>
@@ -363,39 +351,39 @@ export default function ProviderUpdate() {
                                         <select
                                             placeholder="التخصص"
                                             name="SpecializationId"
-                                            value={formData.SpecializationId}
+                                            value={formData?.SpecializationId}
                                             onChange={onChangeHandler}
                                             className={`${style.input}`}
                                         >
                                             <option value='' >التخصص</option>
                                             {categoriesArray&&categoriesArray.map(category=>(
-                                            <option value={category.id}  key={category.id} >{category.title}</option>
+                                            <option value={category?.id}  key={category?.id} >{category?.title}</option>
                                             ))}
                                
                                         </select>
                                         <Form.Text className={`${style.msErr}`}>
-                                            {formError.SpecializationId}
+                                            {formError?.SpecializationId}
                                         </Form.Text>
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="experience" >
                                         <Form.Label className={`${style.label}`}> تغيير نبذه عنك   </Form.Label>
-                                        <Form.Control name="experience" className={`${style.input}`} placeholder=" نبذه عنك" onChange={onChangeHandler} value={formData.experience} />
+                                        <Form.Control name="experience" className={`${style.input}`} placeholder=" نبذه عنك" onChange={onChangeHandler} value={formData?.experience} />
                                         <Form.Text className={`${style.msErr}`}>
-                                            {formError.experience}
+                                            {formError?.experience}
                                         </Form.Text>
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="confirmPassword">
                                         <Form.Label className={`${style.label}`}> تأكيد كلمه المرور </Form.Label>
-                                        <Form.Control name="confirmPassword" type="password" autoComplete="off" className={`${style.input}`} placeholder="تأكيد كلمة المرور" onChange={onChangeHandler} value={formData.confirmPassword} />
+                                        <Form.Control name="confirmPassword" type="password" autoComplete="off" className={`${style.input}`} placeholder="تأكيد كلمة المرور" onChange={onChangeHandler} value={formData?.confirmPassword} />
                                         <Form.Text className={`${style.msErr}`}>
-                                            {formError.confirmPassword}
+                                            {formError?.confirmPassword}
                                         </Form.Text>
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="password">
                                         <Form.Label className={`${style.label}`}>تغيير كلمه المرور </Form.Label>
-                                        <Form.Control name="password" type="password" autoComplete="off" className={`${style.input}`} placeholder="كلمة المرور" onChange={onChangeHandler} value={formData.password} />
+                                        <Form.Control name="password" type="password" autoComplete="off" className={`${style.input}`} placeholder="كلمة المرور" onChange={onChangeHandler} value={formData?.password} />
                                         <Form.Text className={`${style.msErr}`}>
-                                            {formError.password}
+                                            {formError?.password}
                                         </Form.Text>
                                     </Form.Group>
                                 </div>
@@ -404,6 +392,7 @@ export default function ProviderUpdate() {
                         </div>
                     </div>
                 </div>
+                <ToastContainer />
             </section>
         </>
     )

@@ -61,17 +61,17 @@ export default function Footer() {
                                 <hr />
                                
                                 <p>
-                                    <Link to='#!' className='text-reset footer__link'>
+                                    <Link to="/" className='text-reset footer__link'>
                                     الرئيسية
                                     </Link>
                                 </p>
                                 <p>
-                                    <Link to='/askForVoluntary' className='text-reset footer__link'>
+                                    <Link to="/advisor" className='text-reset footer__link'>
                                     استشارات
                                     </Link>
                                 </p>
                                 <p>
-                                    <Link to='/askForVoluntary' className='text-reset footer__link'>
+                                    <Link  to="/contactUs" className='text-reset footer__link'>
                                     تواصل معنا
                                     </Link>
                                 </p>
@@ -82,12 +82,12 @@ export default function Footer() {
                                 <h6 className='footer__h6 text-uppercase fw-bold mb-4'>الروابط</h6>
                                 <hr />
                                 <p>
-                                    <Link to='/askForVoluntary' className='text-reset footer__link'>
+                                    <Link to="/signup-advisor" className='text-reset footer__link'>
                                     تسجيل مستشار 
                                     </Link>
                                 </p>
                                 <p>
-                                    <Link to='/askForVoluntary' className='text-reset footer__link'>
+                                    <Link to="/signup" className='text-reset footer__link'>
                                     تسجيل مستفيد
                                     </Link>
                                 </p>

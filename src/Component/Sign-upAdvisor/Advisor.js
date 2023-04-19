@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios'
 import { Modal } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Advisor() {
 
@@ -33,7 +34,7 @@ export default function Advisor() {
     const [categoriesArray,setCategoriesArray]= useState([])
     const handleClose = () => setShow(false);
     useEffect(() => {
-        axios.get("https://jobs.invoacdmy.com/category/all-categories",{headers: {"Accept-Language" : `ar`},}).then(response => 
+        axios.get("https://jobs.invoacdmy.com/category/all-categories",{headers: {"Accept-Language" : `ar`}}).then(response => 
         setCategoriesArray(response.data.data)
         ).catch((err)=>{console.log(err)})
     },[])
@@ -83,8 +84,6 @@ export default function Advisor() {
 
         if (formData.name === '') {
             err.name = 'الاسم مطلوب';
-        } else if (!validname.test(name)) {
-            err.name = 'يحب كتابه الاسم بدون مسافات';
         }
         if (formData.email === '') {
             err.email = "البريد الالكتروني مطلوب";
@@ -154,6 +153,8 @@ export default function Advisor() {
      }
 
     const onSubmitHandler = (event) => {
+        const toastId =   toast.loading("Please wait...")
+        setTimeout(() => {toast.dismiss(toastId);}, 1000);
         event.preventDefault();
         handleError()
         axios
@@ -166,26 +167,17 @@ export default function Advisor() {
         .then((response) =>{
             localStorage.setItem("token",response.data.data.token)
             setShow(true)
-            seterrResponse(response.data.message)
+            toast.success("Successfully SignUp!")
             handleRedirect()
         })
         .catch((err)=>{
-          setShow(true)
-          seterrResponse(err.response.data.message)
+          toast.error(err.response.data.message)
       })
     }
    
     return (
         <>
-           <Modal className={`${style['modal__mess-err']}`} show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                <Modal.Title>اهلا بك </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {errResponse}
-                </Modal.Body>
-     
-            </Modal>
+      
             <div className={`${style.path}`}>
                 <nav aria-label="breadcrumb" class="breadcrumb d-flex justify-content-between container" dir='rtl'>
                     <ol class="breadcrumb">
@@ -351,6 +343,8 @@ export default function Advisor() {
                         </Form>
                     </div>
                 </div>
+                
+             <ToastContainer />
             </section>
         </>
     )

@@ -2,7 +2,7 @@
     display: flex;
     text-align: center;
     padding-bottom: 50px;
-
+    background-image: url(../../assets/Images/bg-pattern.jpg) !important
 }
 
 .path {
@@ -22,7 +22,7 @@
 
 .login {
     position: relative;
-    width: 80% !important;
+    width: 70% !important;
     margin: auto;
     margin-top: 3%;
     border: 1px solid #afacac;
@@ -31,14 +31,17 @@
     padding-bottom: 30px;
     border-radius: 5px;
     font-family: "Changa-Regular" !important;
+    direction: rtl;
+
 }
 .loginPara{
     position: absolute;
     color: #333;
     background-color: #fff;
-left: 85% !important;
-top: -18px;
-font-size: 20px;
+    left: 80% !important;
+    top: -18px;
+    font-size: 20px;
+    
 }
 
 .login__title {
@@ -56,8 +59,8 @@ font-size: 20px;
     transition: 300ms ease-in-out;
     font-size: 17px;
     color: #202020;
-    border: 2px solid #535151 !important;
-    width: 500px !important;
+    border: 2px solid #adadadb6 !important;
+    width: 70% !important;
     height: 50px;
     margin: 10px auto;
 }
@@ -75,21 +78,19 @@ font-size: 20px;
 
 .label {
     text-align: right !important;
-    margin-left: 70%;
+    display: block;
+    width: 70% !important;
+    margin: auto !important;
    
 }
-.form{
-    display: flex !important;
-}
+
 
 .log__btn {
     --color: #6786A1;
     font-family: inherit;
     display: inline-block;
-    width: 200px !important;
     height: 2.6em;
     line-height: 2.5em;
-    margin-left: 70%;
     margin-top: 30px;
     position: relative;
     overflow: hidden;
@@ -101,6 +102,7 @@ font-size: 20px;
     font-weight: 500;
     color: #fff;
     background-color: #6786A1;
+    width: 70% !important;
 }
 
 .input::placeholder {
@@ -137,9 +139,7 @@ font-size: 20px;
     transition: background 0s;
 }
 
-.log__btn {
-    width: 50%;
-}
+
 
 .forgetLine {
     margin-bottom: 20px;
@@ -188,10 +188,15 @@ font-size: 20px;
     -o-border-radius: 15px;
     color: #ffffff;
 }
-
+.iconImg svg{
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50%;
+ 
+}
 @media (max-width:767px) {
     .login {
-        width: 95%;
+        width: 95% !important;
         margin-top: 50px;
     }
 
@@ -202,7 +207,7 @@ font-size: 20px;
     }
 
     .input {
-        margin-top: 30px;
+        margin-top: 10px;
     }
 
     .user-labell {
@@ -215,9 +220,7 @@ font-size: 20px;
         .loginPara{
             left: 50% !important;
         }
-                .label{
-                    margin-left: 50%;
-                }
+              
                 .label{
                     margin-top: 15px;
                 }
@@ -227,16 +230,12 @@ font-size: 20px;
 }
 
 @media (min-width:768px) and (max-width:1200px) {
-    .login {
-        width: 95%;
-    }
+   
          .loginPara {
              left: 70% !important;
          }
     
-         .label {
-             margin-left: 50%;
-         }
+        
     
          .label {
              margin-top: 15px;
@@ -244,7 +243,7 @@ font-size: 20px;
     
          .log__btn {
              margin-top: 50px !important;
-             margin-left: 5% !important;
+            
          }
 
 }
@@ -254,12 +253,6 @@ font-size: 20px;
         width: 75%;
     }
 
-}
-
-@media (min-width:1451px) {
-    .login {
-        width: 50%;
-    }
 }
 
 .img {
@@ -277,7 +270,7 @@ font-size: 20px;
 }
 
 .button {
-    margin: 0 auto ;
+    margin: 0 auto;
     border: 1px solid transparent;
     border-radius: 50% !important;
     width: 150px;
@@ -289,5 +282,6 @@ font-size: 20px;
     -ms-border-radius: 50% !important;
     -o-border-radius: 50% !important;
     background-color: #dad3d3 !important;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    margin-top: 50px;
 }

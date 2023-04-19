@@ -37,7 +37,7 @@ export default function Router() {
         <Route path="/advisor" element={<Advisors />} />
         <Route path="/details/:id" element={<Details />} />
         <Route path="/" element={<Home />} />
-        <Route path="/chatwithEng" element={<ChatWithEng />} />
+        <Route path="/chatwithEng/:id" element={<ChatWithEng />} />
         <Route path="/contactUs" element={<ContactUs />} />
         {/* <Route path="/user-update" element={userType === 'provider' ? <UserUpdate /> : <ProviderUpdate />} /> */}
         <Route path="/provider-update/:id" element={<ProviderUpdate />} />

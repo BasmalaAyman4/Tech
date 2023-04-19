@@ -29,16 +29,17 @@ const NavbarMenu = () => {
     const [userTypeDetails,setUserTypeDetails]=useState({})
 
     useEffect(() => {
-        if(token){
+        if(localStorage.getItem('token')){
             navigate("/")
             const decoded = jwt_decode(token)
             setUserTypeDetails(decoded)
             console.log( decoded)
+            
          
             decoded.user_type === 'user' ? setUserType('user') : setUserType('provider')
-            }else {
-                navigate("/login") 
-            }
+        }else {
+             navigate("/login") 
+        }
             
     }, [token])
 
@@ -86,37 +87,57 @@ const NavbarMenu = () => {
 
                                     <ul className="nav-side__list pt-3">
                                         <li>
-                                            <NavLink className="nav-link nav-link__nav-toggle" to="/" href="index.html">الرئيسية </NavLink>
+                                            <NavLink className="nav-link nav-link__nav-toggle" to="/" >الرئيسية </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink className="nav-link nav-link__nav-toggle" to="/advisor" href="index.html">استشارات </NavLink>
+                                            <NavLink className="nav-link nav-link__nav-toggle" to="/advisor" >استشارات </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink className="nav-link nav-link__nav-toggle" to="/contactUs" href="index.html">  تواصل معنا </NavLink>
+                                            <NavLink className="nav-link nav-link__nav-toggle" to="/contactUs" >  تواصل معنا </NavLink>
                                         </li>
+                                        {token&&token? 
+                                            userType === 'user' ? 
+                                            <li>
+                                                <NavLink className="nav-link nav-link__nav-toggle"  to={`/user-update/${userTypeDetails.user_id}`} > حسابي </NavLink>
+                                            </li>
+                                            :
+                                            <li>
+                                                <NavLink className="nav-link nav-link__nav-toggle" to={`/provider-update/${userTypeDetails.user_id}`} > حسابي </NavLink>
+                                            </li>
 
-                                        <li>
-                                            <p
-                                                className="nav-link nav-link__nav-toggle"
-                                                onClick={() => setOpenSponsorships(!openSponsorships)}
-                                                aria-controls="Sponsorships"
-                                                aria-expanded={openSponsorships} >
-                                                تسجيل حساب
+                                         :
+                                         <li>
+                                         <p
+                                             className="nav-link nav-link__nav-toggle"
+                                             onClick={() => setOpenSponsorships(!openSponsorships)}
+                                             aria-controls="Sponsorships"
+                                             aria-expanded={openSponsorships} >
+                                             تسجيل حساب
 
-                                            </p>
-                                            <Collapse in={openSponsorships}>
-                                                <div id="Sponsorships">
-                                                    <ul className=" nav-side_dropdown " >
-                                                        <li>  <NavLink className="dropdown-item dropdown-item__nav-toggle" to="/signup-advisor"> تسجيل مستشار  </NavLink></li>
-                                                        <li>  <NavLink className="dropdown-item  dropdown-item__nav-toggle" to="/signup"> تسجيل مستفيد</NavLink></li>
-                                                    </ul>
-                                                </div>
-                                            </Collapse>
-                                        </li>
+                                         </p>
+                                         <Collapse in={openSponsorships}>
+                                             <div id="Sponsorships">
+                                                 <ul className=" nav-side_dropdown " >
+                                                     <li>  <NavLink className="dropdown-item dropdown-item__nav-toggle" to="/signup-advisor"> تسجيل مستشار  </NavLink></li>
+                                                     <li>  <NavLink className="dropdown-item  dropdown-item__nav-toggle" to="/signup"> تسجيل مستفيد</NavLink></li>
+                                                 </ul>
+                                             </div>
+                                         </Collapse>
+                                     </li>
 
+                                        }
+                                  
+        
+                                    {token&&token? 
                                         <li>
-                                            <NavLink className="nav-link nav-link__nav-toggle" to="/login" href="index.html"> تسجيل دخول</NavLink>
+                                            <NavLink  to="/login" className="nav-link nav-link__nav-toggle" onClick={()=>{handleAuth()}} >تسجيل خروج</NavLink>
                                         </li>
+                                        :
+                                        <li>
+                                            <NavLink  to="/login" className="nav-link nav-link__nav-toggle"> تسجيل دخول </NavLink>
+                                        </li>
+                                       
+                                    }
                                     </ul>
                                 </div>
                                 <div className="other-side" onClick={() => { setNavbarSide(false) }}>
@@ -134,7 +155,7 @@ const NavbarMenu = () => {
                                     <NavLink to="/advisor" className={`${styles.mainNav__link} main-nav__link`}> استشارات </NavLink>
                                     <NavLink to="/contactUs" className={`${styles.mainNav__link} main-nav__link`}> تواصل معنا </NavLink>
                                     
-                                    {token ?
+                                    {token&&token ?
                                       userType === 'user' ? 
                                        <NavLink className={`${styles.mainNav__link}  nav-item nav__item  nav-link`}  to={`/user-update/${userTypeDetails.user_id}`} > حسابي </NavLink> 
                                        :

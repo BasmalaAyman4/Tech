@@ -14,8 +14,8 @@ export default function Advisors() {
     const [providersArray,setProvidersArray]= useState([])
     const [specializationId,setSpecializationId] = useState()
     const [filterLink,setfilterLink] = useState('')
+    const [specialization,setSpecialization] = useState('')
 
-//    const [providersFilter,setProvidersFilter]=useState([])
     
     const handleFilterProviders = (e) => {
         setSpecializationId(e.target.value)
@@ -45,8 +45,10 @@ export default function Advisors() {
 
         axios.get("https://jobs.invoacdmy.com/category/all-categories",
         {headers: {"Accept-Language" : `ar`}})
-        .then(response => 
+        .then((response) =>{
            setCategoriesArray(response.data.data)
+         
+        }
         ).catch((err)=>{console.log(err)})
 
         
@@ -55,8 +57,10 @@ export default function Advisors() {
               "Accept-Language" : `ar`
             }
           })
-          .then(response => 
+          .then((response) => {
              setProvidersArray(response.data.data.data)
+             console.log(response.data.data.data)
+          }
         )
         .catch((err)=>{console.log(err)})
 
@@ -85,7 +89,7 @@ export default function Advisors() {
                 <div className={`${style.cardAdvisors}`}>
                     <div className='row'>
                         {providersArray&&providersArray.map(provider=>(
-                        <AdvisorsCard id={provider.id} key={provider.id} title={provider.name} text={provider.description} img={provider.personal_photo} />
+                        <AdvisorsCard id={provider?.id} key={provider?.id} name={provider?.name} specialization={provider?.category_id.title} decription={provider?.description} img={provider?.personal_photo} />
                         ))}
                     </div>
                 </div>

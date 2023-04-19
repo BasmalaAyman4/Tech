@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify'
 export default function SignUp() {
   
     
@@ -38,9 +39,7 @@ export default function SignUp() {
 
     if (formData.userName === '') {
       err.userName = 'الاسم مطلوب';
-    } else if (!validname.test(userName)) {
-      err.userName = 'يجب كتابه الاسم بدون مسافات';
-    }
+    } 
     if (formData.email === '') {
       err.email = "بريد الكتروني مطلوب";
     } else if (!validEmail.test(email)) {
@@ -75,40 +74,25 @@ export default function SignUp() {
      }
 
     function onSignUpHandler(event){
+      const toastId =   toast.loading("Please wait...")
+      setTimeout(() => {toast.dismiss(toastId);}, 1000);
       event.preventDefault();
       handleSignUpMesErr()
       axios.post(reqSignUpLink,reqSignUpData)
       .then((response)=> {
         localStorage.setItem("token",response.data.data.token)
-        setShow(true)
-        seterrResponse(response.data.message)
+        toast.success("Successfully SignUp!")
         handleRedirect()
       })
       .catch((err)=>{
-        setShow(true)
-        seterrResponse(err.response.data.message)
+        toast.error(err.response.data.message)
       })
     }
 
 
   return (
     <>
-      <Modal className={`${style['modal__mess-err']}`} show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                <Modal.Title>مرحبا بك </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {errResponse}
-                </Modal.Body>
-                <Modal.Footer className='justify-content-around'>
-                <Link to="/signup" onClick={handleClose}>
-                    انشاء حساب مستخدم 
-                </Link>
-                <Link to="/signup-advisor" onClick={handleClose}>
-                    انشاء حساب مستشار 
-                </Link>
-                </Modal.Footer>
-            </Modal>
+     
       <div className={`${style.path}`}>
         <nav aria-label="breadcrumb" class="breadcrumb d-flex justify-content-between container" dir='rtl'>
           <ol class="breadcrumb">
@@ -160,12 +144,13 @@ export default function SignUp() {
                 </Form.Group>
 
                 <Button className={style.signup__btn} type="submit">
-                  "انشاء حساب"
+                  انشاء حساب
                 </Button>
               </div>
             </Form>
           </div>
         </div>
+        <ToastContainer />
       </section>
     </>
   )
